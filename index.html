@@ -33,15 +33,15 @@
             color: var(--accent-color);
         }
 
-        .reveal section {
-            display: flex !important;
-            flex-direction: column !important;
-            justify-content: center !important;
-            align-items: center !important;
-            text-align: center !important;
-            min-height: 100vh !important;
+        .reveal .slides section {
+            text-align: center;
             box-sizing: border-box;
-            padding: 2rem;
+            padding: 2rem 3rem;
+        }
+        
+        .reveal .slides section .slide-content {
+            max-width: 1100px;
+            margin: 0 auto;
         }
 
         .reveal h1, .reveal h2, .reveal h3 {
