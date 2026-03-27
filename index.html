@@ -1,900 +1,358 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpenClaw: ваш первый цифровой сотрудник</title>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/theme/black.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --primary-bg: #08090d;
-            --accent-color: #00FFB7;
-            --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.8);
-            --card-bg: rgba(255, 255, 255, 0.06);
-            --card-border: rgba(255, 255, 255, 0.1);
-            --gradient-blue: #4F90E8;
-            --gradient-green: #00FFB7;
-        }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>OpenClaw: ваш первый цифровой сотрудник</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#08090d;--t1:#F6F7FB;--t2:rgba(246,247,251,.7);--t3:rgba(246,247,251,.5);--blue:#0066FF;--green:#00FFB7;--card:rgba(255,255,255,.05);--cborder:rgba(255,255,255,.08)}
+.reveal,.reveal .slides{background:var(--bg)}
+.reveal{font-family:'Manrope',sans-serif;color:var(--t1)}
+.reveal h1,.reveal h2,.reveal h3{font-family:'Space Grotesk',sans-serif;font-weight:700;background:linear-gradient(135deg,var(--blue),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-align:center;margin-bottom:.6em}
+.reveal h1{font-size:clamp(2.2rem,5vw,3.8rem)}
+.reveal h2{font-size:clamp(1.6rem,3.5vw,2.6rem)}
+.reveal p,.reveal li{color:var(--t2);font-size:clamp(1rem,1.8vw,1.3rem);line-height:1.6;text-align:center}
+.reveal .slides section{text-align:center;padding:1.5rem 2rem}
 
-        .reveal .slides {
-            background-color: var(--primary-bg) !important;
-        }
-        
-        .reveal .progress span {
-            background: var(--accent-color);
-        }
-        
-        .reveal .controls {
-            color: var(--accent-color);
-        }
+/* cards */
+.gc{background:var(--card);border:1px solid var(--cborder);border-radius:16px;backdrop-filter:blur(12px);padding:1.2rem 1.5rem;text-align:center}
+.gc h3{font-size:1.2rem;margin-bottom:.4em}
+.gc p{font-size:.95rem;margin:0}
 
-        .reveal .slides section {
-            text-align: center;
-            box-sizing: border-box;
-            padding: 2rem 3rem;
-        }
-        
-        .reveal .slides section .slide-content {
-            max-width: 1100px;
-            margin: 0 auto;
-        }
+/* grids */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;width:100%;max-width:1000px;margin:1rem auto}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;width:100%;max-width:1000px;margin:1rem auto}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem;width:100%;max-width:1100px;margin:1rem auto}
+.g5{display:grid;grid-template-columns:repeat(5,1fr);gap:.6rem;width:100%;max-width:1100px;margin:.8rem auto}
 
-        .reveal h1, .reveal h2, .reveal h3 {
-            font-family: 'Space Grotesk', sans-serif !important;
-            font-weight: 700 !important;
-            font-size: clamp(2rem, 4vw, 3rem) !important;
-            background: linear-gradient(135deg, var(--gradient-blue) 0%, var(--gradient-green) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 2rem !important;
-            line-height: 1.2 !important;
-        }
+/* accent card */
+.gc.bright{border-color:var(--green);box-shadow:0 0 30px rgba(0,255,183,.15)}
+.gc.dim{opacity:.55}
+.gc.mid{border-color:rgba(0,102,255,.3)}
 
-        .reveal p, .reveal li {
-            font-family: 'Manrope', sans-serif !important;
-            font-size: 1.4rem !important;
-            line-height: 1.6 !important;
-            color: var(--text-secondary) !important;
-        }
+/* quote */
+.quote{border-left:3px solid var(--green);background:rgba(0,255,183,.04);padding:1rem 1.5rem;border-radius:0 12px 12px 0;font-style:italic;font-size:clamp(1.1rem,2vw,1.5rem);color:var(--t1);max-width:900px;margin:1rem auto;text-align:left;line-height:1.5}
 
-        .content-container {
-            width: 100%;
-            max-width: 1100px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 2rem;
-        }
+/* stat number */
+.sn{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(1.8rem,4vw,2.8rem);background:linear-gradient(135deg,var(--blue),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;margin-bottom:.3rem}
 
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            backdrop-filter: blur(12px);
-            transition: all 0.3s ease;
-            text-align: left;
-            width: 100%;
-        }
+/* emoji big */
+.em{font-size:2.2rem;display:block;margin-bottom:.5rem}
 
-        .card:hover {
-            transform: translateY(-4px);
-            background: rgba(255, 255, 255, 0.08);
-        }
+/* flow arrow */
+.fa{color:var(--green);font-size:1.8rem;font-weight:700;display:flex;align-items:center;justify-content:center}
 
-        .card.accent {
-            border: 2px solid var(--accent-color);
-            background: rgba(0, 255, 183, 0.1);
-        }
+/* flow row */
+.flow{display:flex;align-items:center;justify-content:center;gap:.6rem;flex-wrap:wrap;margin:1rem auto;max-width:1000px}
+.flow .gc{min-width:120px}
 
-        .card.dim {
-            opacity: 0.6;
-        }
+/* subtitle */
+.sub{font-family:'Space Grotesk',sans-serif;font-weight:500;color:var(--t3);font-size:clamp(.9rem,1.4vw,1.1rem);letter-spacing:.1em;text-transform:uppercase;margin-top:1.5rem}
 
-        .card h3 {
-            margin-bottom: 1rem !important;
-            font-size: 1.6rem !important;
-        }
+/* progress bar */
+.reveal .progress{height:3px}
+.reveal .progress span{background:linear-gradient(90deg,var(--blue),var(--green))}
+.reveal .controls{color:rgba(255,255,255,.6)}
+.reveal .slide-number{color:var(--t3);font-family:'Space Grotesk',sans-serif;font-size:.7rem}
 
-        .card p {
-            margin: 0 !important;
-            font-size: 1.2rem !important;
-        }
+/* timeline */
+.tl{max-width:700px;margin:1rem auto}
+.tl-item{display:flex;align-items:center;gap:1.5rem;margin:.5rem 0;text-align:left}
+.tl-time{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;background:linear-gradient(135deg,var(--blue),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;min-width:80px}
+.tl-act{color:var(--t1);font-size:1.1rem}
 
-        .grid {
-            display: grid;
-            width: 100%;
-            gap: 1rem;
-        }
-
-        .grid-2 { grid-template-columns: repeat(2, 1fr); }
-        .grid-3 { grid-template-columns: repeat(3, 1fr); }
-        .grid-4 { grid-template-columns: repeat(4, 1fr); }
-        .grid-5 { grid-template-columns: repeat(5, 1fr); }
-        .grid-2x2 { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(2, 1fr); }
-        .grid-2x3 { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(3, 1fr); }
-        .grid-2x4 { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(4, 1fr); }
-        .grid-2x5 { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(5, 1fr); }
-
-        .quote {
-            background: rgba(0, 255, 183, 0.05);
-            border-left: 3px solid var(--accent-color);
-            padding: 2rem;
-            margin: 2rem 0;
-            border-radius: 8px;
-            font-style: italic;
-            font-size: 1.8rem !important;
-            color: var(--text-primary) !important;
-        }
-
-        .quote-author {
-            font-size: 1.2rem !important;
-            margin-top: 1rem;
-            opacity: 0.8;
-        }
-
-        .big-emoji {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: var(--accent-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .subtitle {
-            font-size: 1.6rem !important;
-            color: var(--text-secondary) !important;
-            margin-bottom: 3rem !important;
-        }
-
-        .timeline {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            width: 100%;
-        }
-
-        .timeline-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            background: var(--card-bg);
-            border-radius: 12px;
-            border: 1px solid var(--card-border);
-        }
-
-        .timeline-time {
-            background: var(--accent-color);
-            color: var(--primary-bg);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            font-weight: bold;
-            min-width: 80px;
-        }
-
-        .arrow {
-            font-size: 2rem;
-            color: var(--accent-color);
-            margin: 0 1rem;
-        }
-
-        .flow {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-            width: 100%;
-        }
-
-        .flow .card {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .title-slide h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem) !important;
-            margin-bottom: 1rem !important;
-        }
-
-        .title-slide .subtitle {
-            font-size: 1.8rem !important;
-        }
-
-        /* Slide entrance animation */
-        .reveal .slides section {
-            opacity: 0;
-            animation: slideIn 0.8s ease-out forwards;
-        }
-
-        .reveal .slides section.present {
-            opacity: 1;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .highlight {
-            color: var(--accent-color) !important;
-            font-weight: 600;
-        }
-
-        .center-text {
-            text-align: center !important;
-        }
-
-        .large-text {
-            font-size: 2rem !important;
-            color: var(--text-primary) !important;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .grid-3, .grid-4, .grid-5 {
-                grid-template-columns: 1fr;
-            }
-            
-            .grid-2x2, .grid-2x3, .grid-2x4, .grid-2x5 {
-                grid-template-columns: 1fr;
-            }
-            
-            .flow {
-                flex-direction: column;
-            }
-        }
-    </style>
+/* responsive */
+@media(max-width:900px){.g3,.g4,.g5{grid-template-columns:repeat(2,1fr)}.flow{flex-direction:column}}
+@media(max-width:600px){.g2,.g3,.g4,.g5{grid-template-columns:1fr}}
+</style>
 </head>
-
 <body>
-    <div class="reveal">
-        <div class="slides">
-            
-            <!-- Слайд 1: Титул -->
-            <section data-background-image="img/hero.jpg" data-background-opacity="0.15">
-                <div class="content-container title-slide">
-                    <h1>OpenClaw: ваш первый цифровой сотрудник</h1>
-                    <p class="subtitle">AI First · Алексей Южанинов · Март 2026</p>
-                </div>
-            </section>
+<div class="reveal">
+<div class="slides">
 
-            <!-- Слайд 2: Контекст -->
-            <section data-background-image="img/hero.jpg" data-background-opacity="0.15">
-                <div class="content-container">
-                    <div class="quote">
-                        "В следующие 10 лет каждая компания станет AI-компанией. Те, кто не адаптируется, исчезнут."
-                        <div class="quote-author">— Jensen Huang, NVIDIA</div>
-                    </div>
-                    
-                    <div class="grid grid-3">
-                        <div class="card">
-                            <h3>68K+ GitHub stars</h3>
-                            <p>Самый популярный AI-агент</p>
-                        </div>
-                        <div class="card">
-                            <h3>Forbes, DigitalOcean, KDnuggets</h3>
-                            <p>Топ списки инструментов</p>
-                        </div>
-                        <div class="card">
-                            <h3>#1 AI-инструмент 2026</h3>
-                            <p>По версии ProductHunt</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+<!-- 1. ТИТУЛ -->
+<section data-background-image="img/hero.jpg" data-background-opacity="0.15">
+<h1>OpenClaw: ваш первый<br>цифровой сотрудник</h1>
+<p class="sub">AI First · Алексей Южанинов · Март 2026</p>
+</section>
 
-            <!-- Слайд 3: Три поколения -->
-            <section data-background-image="img/evolution.jpg" data-background-opacity="0.15">
-                <div class="content-container">
-                    <h2>Три поколения ИИ-помощников</h2>
-                    
-                    <div class="grid grid-3">
-                        <div class="card dim">
-                            <h3>ChatGPT</h3>
-                            <p>• Работает в облаке</p>
-                            <p>• Только советует</p>
-                            <p>• Слабая память</p>
-                            <p>• Нет автономности</p>
-                        </div>
-                        <div class="card">
-                            <h3>Claude Code</h3>
-                            <p>• Работает локально</p>
-                            <p>• Пишет код</p>
-                            <p>• Контекст файлов</p>
-                            <p>• Только по запросу</p>
-                        </div>
-                        <div class="card accent">
-                            <h3>OpenClaw</h3>
-                            <p>• Работает везде</p>
-                            <p>• Действует самостоятельно</p>
-                            <p>• Персистентная память</p>
-                            <p>• Heartbeat каждые 30 минут</p>
-                        </div>
-                    </div>
-                    
-                    <p class="large-text center-text">ChatGPT — чат. Claude Code — кодер. OpenClaw — сотрудник.</p>
-                </div>
-            </section>
+<!-- 2. КОНТЕКСТ -->
+<section data-background-image="img/hero.jpg" data-background-opacity="0.1">
+<div class="quote">«В следующие 10 лет каждая компания станет AI-компанией. Тот, кто не начнёт — исчезнет.»<br><span style="color:var(--t3);font-style:normal;font-size:.9rem">— Jensen Huang, NVIDIA</span></div>
+<div class="g3">
+<div class="gc"><span class="sn">68K+</span><p>GitHub stars за 3 мес</p></div>
+<div class="gc"><span class="sn">Forbes</span><p>DigitalOcean, KDnuggets</p></div>
+<div class="gc"><span class="sn">#1</span><p>AI-инструмент 2026</p></div>
+</div>
+</section>
 
-            <!-- Слайд 4: Метафора -->
-            <section data-background-image="img/hero.jpg" data-background-opacity="0.15">
-                <div class="content-container">
-                    <h2>Простая метафора</h2>
-                    
-                    <div class="grid grid-3">
-                        <div class="card">
-                            <div class="big-emoji">💬</div>
-                            <h3>ChatGPT = консультант</h3>
-                            <p>Даёт советы, но ничего не делает</p>
-                        </div>
-                        <div class="card">
-                            <div class="big-emoji">💻</div>
-                            <h3>Claude Code = программист</h3>
-                            <p>Сидит за ноутбуком, кодит по ТЗ</p>
-                        </div>
-                        <div class="card accent">
-                            <div class="big-emoji">🚀</div>
-                            <h3>OpenClaw = сотрудник</h3>
-                            <p>У него телефон и доступы ко всем системам</p>
-                        </div>
-                    </div>
-                    
-                    <p class="large-text center-text highlight">Он не просто отвечает — он ДЕЛАЕТ</p>
-                </div>
-            </section>
+<!-- 3. ТРИ ПОКОЛЕНИЯ -->
+<section data-background-image="img/evolution.jpg" data-background-opacity="0.12">
+<h2>Три поколения ИИ-помощников</h2>
+<div class="g3">
+<div class="gc dim">
+<h3>ChatGPT (2023)</h3>
+<p>☁️ Облако<br>💭 Советует<br>🧠 Слабая память<br>❌ Нет автономности<br>🔌 Плагины</p>
+</div>
+<div class="gc mid">
+<h3>Claude Code (2025)</h3>
+<p>💻 Локально<br>⚙️ Кодит<br>📁 Контекст файлов<br>👋 По запросу<br>🛠️ Файлы + терминал</p>
+</div>
+<div class="gc bright">
+<h3>OpenClaw (2026)</h3>
+<p>🌐 Везде<br>🚀 Действует<br>💾 Персистентная память<br>⏰ Heartbeat 30 мин<br>🔧 Браузер, API, email, cron, skills</p>
+</div>
+</div>
+<p style="margin-top:1rem;font-size:1.3rem;color:var(--t1)"><strong>ChatGPT — чат. Claude Code — кодер. OpenClaw — сотрудник.</strong></p>
+</section>
 
-            <!-- Слайд 5: Почему важно -->
-            <section data-background-image="img/hero.jpg" data-background-opacity="0.15">
-                <div class="content-container">
-                    <h2>Почему это важно</h2>
-                    
-                    <div style="display: flex; flex-direction: column; gap: 2rem; align-items: center;">
-                        <p class="large-text center-text">Разрыв огромный</p>
-                        <p class="large-text center-text">ChatGPT = советчик. OpenClaw = исполнитель.</p>
-                        <p class="large-text center-text highlight">Задача в Telegram → агент выполняет</p>
-                    </div>
-                </div>
-            </section>
+<!-- 4. МЕТАФОРА -->
+<section data-background-image="img/hero.jpg" data-background-opacity="0.08">
+<h2>Простая метафора</h2>
+<div class="g3">
+<div class="gc"><span class="em">💬</span><h3>ChatGPT</h3><p>Переписываться с умным консультантом</p></div>
+<div class="gc"><span class="em">💻</span><h3>Claude Code</h3><p>Посадить программиста за свой ноутбук</p></div>
+<div class="gc bright"><span class="em">🚀</span><h3>OpenClaw</h3><p>Нанять сотрудника, дать телефон и доступы</p></div>
+</div>
+<p style="margin-top:1.5rem;font-size:1.5rem;color:var(--t1)">Он не просто отвечает — он <span style="color:var(--green)">ДЕЛАЕТ</span></p>
+</section>
 
-            <!-- Слайд 6: Архитектура -->
-            <section data-background-image="img/arch.jpg" data-background-opacity="0.15">
-                <div class="content-container">
-                    <h2>Архитектура решения</h2>
-                    
-                    <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem; width: 100%;">
-                        <div class="card" style="width: 80%;">
-                            <h3 class="center-text">Telegram / Slack / WhatsApp</h3>
-                        </div>
-                        <div class="arrow">↕</div>
-                        <div class="card" style="width: 80%;">
-                            <h3 class="center-text">OpenClaw Gateway</h3>
-                        </div>
-                        <div class="arrow">↕</div>
-                        <div class="card" style="width: 80%;">
-                            <h3 class="center-text">AI мозг (Claude / GPT / Gemini)</h3>
-                        </div>
-                        <div class="arrow">↕</div>
-                        <div class="card" style="width: 80%;">
-                            <h3 class="center-text">Инструменты (браузер, email, файлы, API, cron)</h3>
-                        </div>
-                    </div>
-                </div>
-            </section>
+<!-- 5. ПОЧЕМУ ВАЖНО -->
+<section data-background-image="img/hero.jpg" data-background-opacity="0.08">
+<h2>Почему это важно</h2>
+<div class="gc" style="max-width:800px;margin:1rem auto"><p style="font-size:1.4rem;color:var(--t1)">Разрыв между «хочу попробовать ИИ»<br>и «ИИ реально работает на меня» — <span style="color:var(--green)">огромный</span></p></div>
+<div class="gc" style="max-width:800px;margin:1rem auto"><p style="font-size:1.4rem;color:var(--t1)">ChatGPT = советчик. <span style="color:var(--green)">OpenClaw = исполнитель.</span></p></div>
+<div class="gc" style="max-width:800px;margin:1rem auto"><p style="font-size:1.4rem;color:var(--t1)">Задача в Telegram → агент выполняет</p></div>
+</section>
 
-            <!-- Слайд 7: 10 шагов -->
-            <section data-background-image="img/setup.jpg" data-background-opacity="0.15">
-                <div class="content-container">
-                    <h2>Настройка за 10 шагов</h2>
-                    
-                    <div class="grid grid-2x5">
-                        <div class="card">
-                            <div class="number">1</div>
-                            <h3>Установка</h3>
-                            <p>npm install -g openclaw</p>
-                        </div>
-                        <div class="card">
-                            <div class="number">2</div>
-                            <h3>Персонализация</h3>
-                            <p>Имя, роль, стиль общения</p>
-                        </div>
-                        <div class="card">
-                            <div class="number">3</div>
-                            <h3>Память</h3>
-                            <p>База знаний и контекст</p>
-                        </div>
-                        <div class="card">
-                            <div class="number">4</div>
-                            <h3>Модель</h3>
-                            <p>Claude, GPT или Gemini</p>
-                        </div>
-                        <div class="card">
-                            <div class="number">5</div>
-                            <h3>Telegram</h3>
-                            <p>Подключение бота</p>
-                        </div>
-                        <div class="card">
-                            <div class="number">6</div>
-                            <h3>Браузер</h3>
-                            <p>Веб-автоматизация</p>
-                        </div>
-                        <div class="card">
-                            <div class="number">7</div>
-                            <h3>Skills</h3>
-                            <p>Специализированные навыки</p>
-                        </div>
-                        <div class="card">
-                            <div class="number">8</div>
-                            <h3>Heartbeat</h3>
-                            <p>Проактивные проверки</p>
-                        </div>
-                        <div class="card">
-                            <div class="number">9</div>
-                            <h3>Безопасность</h3>
-                            <p>Права и ограничения</p>
-                        </div>
-                        <div class="card">
-                            <div class="number">10</div>
-                            <h3>Мин. права</h3>
-                            <p>Принцип наименьших привилегий</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+<!-- 6. АРХИТЕКТУРА -->
+<section data-background-image="img/arch.jpg" data-background-opacity="0.12">
+<h2>Как устроено</h2>
+<div style="max-width:500px;margin:0 auto">
+<div class="gc"><p style="font-size:1.2rem;color:var(--t1)">📱 Telegram / Slack / WhatsApp</p></div>
+<div class="fa">↕</div>
+<div class="gc"><p style="font-size:1.2rem;color:var(--t1)">⚡ OpenClaw Gateway</p></div>
+<div class="fa">↕</div>
+<div class="gc"><p style="font-size:1.2rem;color:var(--t1)">🧠 AI мозг: Claude / GPT / Gemini</p></div>
+<div class="fa">↕</div>
+<div class="gc"><p style="font-size:1.2rem;color:var(--t1)">🔧 Браузер · Email · Файлы · API · Cron</p></div>
+</div>
+</section>
 
-            <!-- Слайд 8: Безопасность -->
-            <section data-background-image="img/security.jpg" data-background-opacity="0.15">
-                <div class="content-container">
-                    <h2>Безопасность из коробки</h2>
-                    
-                    <div class="grid grid-2x2">
-                        <div class="card">
-                            <div class="big-emoji">🔒</div>
-                            <h3>Видит только разрешённое</h3>
-                            <p>Никакого доступа к личным файлам без явного разрешения</p>
-                        </div>
-                        <div class="card">
-                            <div class="big-emoji">👤</div>
-                            <h3>Отдельные аккаунты</h3>
-                            <p>Для каждого сервиса свои учётные данные</p>
-                        </div>
-                        <div class="card">
-                            <div class="big-emoji">🛡️</div>
-                            <h3>Prompt injection защита</h3>
-                            <p>Встроенная защита от атак через промпты</p>
-                        </div>
-                        <div class="card">
-                            <div class="big-emoji">⚖️</div>
-                            <h3>Минимальные права</h3>
-                            <p>Принцип наименьших привилегий для всех операций</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+<!-- 7. 10 ШАГОВ -->
+<section data-background-image="img/setup.jpg" data-background-opacity="0.1">
+<h2>10 шагов настройки</h2>
+<div class="g2">
+<div class="gc"><span class="sn" style="font-size:1.5rem">1</span><p>Установка</p></div>
+<div class="gc"><span class="sn" style="font-size:1.5rem">2</span><p>Персонализация</p></div>
+<div class="gc"><span class="sn" style="font-size:1.5rem">3</span><p>Память</p></div>
+<div class="gc"><span class="sn" style="font-size:1.5rem">4</span><p>Модель</p></div>
+<div class="gc"><span class="sn" style="font-size:1.5rem">5</span><p>Telegram</p></div>
+<div class="gc"><span class="sn" style="font-size:1.5rem">6</span><p>Браузер</p></div>
+<div class="gc"><span class="sn" style="font-size:1.5rem">7</span><p>Skills</p></div>
+<div class="gc"><span class="sn" style="font-size:1.5rem">8</span><p>Heartbeat</p></div>
+<div class="gc"><span class="sn" style="font-size:1.5rem">9</span><p>Безопасность</p></div>
+<div class="gc"><span class="sn" style="font-size:1.5rem">10</span><p>Мин. права</p></div>
+</div>
+</section>
 
-            <!-- Слайд 9: Юзкейсы -->
-            <section data-background-image="img/usecases.jpg" data-background-opacity="0.15">
-                <div class="content-container">
-                    <h2>Что реально делают люди</h2>
-                    
-                    <div class="grid grid-2x4">
-                        <div class="card">
-                            <div class="big-emoji">📧</div>
-                            <h3>Email</h3>
-                            <p>4000 писем за 2 дня</p>
-                        </div>
-                        <div class="card">
-                            <div class="big-emoji">🌅</div>
-                            <h3>Briefing</h3>
-                            <p>Утренний дайджест</p>
-                        </div>
-                        <div class="card">
-                            <div class="big-emoji">📊</div>
-                            <h3>Мониторинг</h3>
-                            <p>Конкуренты 24/7</p>
-                        </div>
-                        <div class="card">
-                            <div class="big-emoji">✍️</div>
-                            <h3>Контент</h3>
-                            <p>10ч/нед экономии</p>
-                        </div>
-                        <div class="card">
-                            <div class="big-emoji">🏗️</div>
-                            <h3>Лендинг</h3>
-                            <p>За одну ночь</p>
-                        </div>
-                        <div class="card">
-                            <div class="big-emoji">🎯</div>
-                            <h3>CRM</h3>
-                            <p>Автозапись встреч</p>
-                        </div>
-                        <div class="card">
-                            <div class="big-emoji">📚</div>
-                            <h3>Наука</h3>
-                            <p>Отслеживание papers</p>
-                        </div>
-                        <div class="card">
-                            <div class="big-emoji">💼</div>
-                            <h3>Бизнес</h3>
-                            <p>На автопилоте</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+<!-- 8. БЕЗОПАСНОСТЬ -->
+<section data-background-image="img/security.jpg" data-background-opacity="0.12">
+<h2>Безопасность</h2>
+<div class="g2">
+<div class="gc"><span class="em">🔒</span><p>Агент видит <strong style="color:var(--green)">только</strong> разрешённое</p></div>
+<div class="gc"><span class="em">👤</span><p>Отдельные аккаунты для агентов</p></div>
+<div class="gc"><span class="em">🛡️</span><p>Prompt injection защита</p></div>
+<div class="gc"><span class="em">⚖️</span><p>Принцип минимальных прав</p></div>
+</div>
+</section>
 
-            <!-- Слайд 10: No AI Slop -->
-            <section data-background-image="img/content.jpg" data-background-opacity="0.15">
-                <div class="content-container">
-                    <h2>Контент без AI-мусора</h2>
-                    
-                    <div class="grid grid-3">
-                        <div class="card">
-                            <div class="big-emoji">❌</div>
-                            <h3>Проблема</h3>
-                            <p>ИИ-тексты выглядят как ИИ — шаблонно, безлико, скучно</p>
-                        </div>
-                        <div class="card">
-                            <div class="big-emoji">⚙️</div>
-                            <h3>Решение</h3>
-                            <p>Система промптов + стиль автора + QA проверка</p>
-                        </div>
-                        <div class="card accent">
-                            <div class="big-emoji">✅</div>
-                            <h3>Результат</h3>
-                            <p>Посты неотличимые от человеческих</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+<!-- 9. ЮЗКЕЙСЫ -->
+<section data-background-image="img/usecases.jpg" data-background-opacity="0.1">
+<h2>Что реально делают люди</h2>
+<div class="g4">
+<div class="gc"><span class="em">📧</span><h3>Email</h3><p>4 000 писем за 2 дня</p></div>
+<div class="gc"><span class="em">🌅</span><h3>Briefing</h3><p>Утренний дайджест</p></div>
+<div class="gc"><span class="em">📊</span><h3>Мониторинг</h3><p>Конкуренты 24/7</p></div>
+<div class="gc"><span class="em">✍️</span><h3>Контент</h3><p>10 ч/нед экономии</p></div>
+<div class="gc"><span class="em">🏗️</span><h3>Лендинг</h3><p>Сайт за ночь</p></div>
+<div class="gc"><span class="em">🎯</span><h3>CRM</h3><p>Автозапись встреч</p></div>
+<div class="gc"><span class="em">📚</span><h3>Наука</h3><p>Трекинг papers</p></div>
+<div class="gc"><span class="em">💼</span><h3>Автопилот</h3><p>Весь бизнес</p></div>
+</div>
+</section>
 
-            <!-- Слайд 11: CRM -->
-            <section data-background-image="img/crm.jpg" data-background-opacity="0.15">
-                <div class="content-container">
-                    <h2>CRM из разговоров</h2>
-                    
-                    <div class="flow">
-                        <div class="card">
-                            <div class="big-emoji">🎤</div>
-                            <h3>Записал встречу</h3>
-                        </div>
-                        <div class="arrow">→</div>
-                        <div class="card">
-                            <div class="big-emoji">📝</div>
-                            <h3>Агент транскрибирует</h3>
-                        </div>
-                        <div class="arrow">→</div>
-                        <div class="card">
-                            <div class="big-emoji">📊</div>
-                            <h3>Логирует в CRM автоматически</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="card" style="margin-top: 2rem;">
-                        <p class="center-text"><strong>Пример:</strong> «Пишешь в Telegram: Иванов заинтересован, перезвонить в четверг → агент заносит в базу»</p>
-                    </div>
-                </div>
-            </section>
+<!-- 10. NO AI SLOP -->
+<section data-background-image="img/content.jpg" data-background-opacity="0.1">
+<h2>Контент без AI-мусора</h2>
+<div class="flow">
+<div class="gc"><span class="em">❌</span><h3>Проблема</h3><p>ИИ-тексты выглядят как ИИ</p></div>
+<div class="fa">→</div>
+<div class="gc"><span class="em">⚙️</span><h3>Решение</h3><p>Промпты + стиль автора + QA</p></div>
+<div class="fa">→</div>
+<div class="gc"><span class="em">✅</span><h3>Результат</h3><p>Неотличимо от человека</p></div>
+</div>
+</section>
 
-            <!-- Слайд 12: Mini-app -->
-            <section data-background-image="img/hero.jpg" data-background-opacity="0.15">
-                <div class="content-container">
-                    <h2>Лендинг за ночь</h2>
-                    
-                    <div class="flow">
-                        <div class="card">
-                            <div class="big-emoji">💡</div>
-                            <h3>Описал идею вечером</h3>
-                        </div>
-                        <div class="arrow">→</div>
-                        <div class="card">
-                            <div class="big-emoji">🤖</div>
-                            <h3>Агент исследует, кодит, деплоит</h3>
-                        </div>
-                        <div class="arrow">→</div>
-                        <div class="card accent">
-                            <div class="big-emoji">🌅</div>
-                            <h3>Утром: рабочий сайт с доменом</h3>
-                        </div>
-                    </div>
-                </div>
-            </section>
+<!-- 11. CRM -->
+<section data-background-image="img/crm.jpg" data-background-opacity="0.1">
+<h2>CRM из разговоров</h2>
+<div class="flow">
+<div class="gc"><span class="em">🎤</span><p>Записал встречу</p></div>
+<div class="fa">→</div>
+<div class="gc"><span class="em">📝</span><p>Агент транскрибирует</p></div>
+<div class="fa">→</div>
+<div class="gc"><span class="em">📊</span><p>Логирует в CRM</p></div>
+</div>
+<div class="quote" style="margin-top:1rem">Пишешь в Telegram: «Иванов заинтересован, перезвонить в четверг» → агент сам заносит в базу</div>
+</section>
 
-            <!-- Слайд 13: Ещё юзкейсы -->
-            <section data-background-image="img/content.jpg" data-background-opacity="0.15">
-                <div class="content-container">
-                    <h2>И это только начало</h2>
-                    
-                    <div class="grid grid-2x3">
-                        <div class="card">
-                            <div class="big-emoji">🏠</div>
-                            <h3>Умный дом</h3>
-                            <p>Управление через Telegram</p>
-                        </div>
-                        <div class="card">
-                            <div class="big-emoji">✈️</div>
-                            <h3>Путешествия</h3>
-                            <p>Маршрут + бюджет автоматически</p>
-                        </div>
-                        <div class="card">
-                            <div class="big-emoji">💰</div>
-                            <h3>Финансы</h3>
-                            <p>Чеки → автоматический учёт</p>
-                        </div>
-                        <div class="card">
-                            <div class="big-emoji">📱</div>
-                            <h3>Автопостинг</h3>
-                            <p>Во все соцсети сразу</p>
-                        </div>
-                        <div class="card">
-                            <div class="big-emoji">🔍</div>
-                            <h3>Мониторинг</h3>
-                            <p>100+ источников одновременно</p>
-                        </div>
-                        <div class="card">
-                            <div class="big-emoji">🤝</div>
-                            <h3>Торг</h3>
-                            <p>При покупке авто с Авито</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+<!-- 12. MINI-APP -->
+<section data-background-image="img/hero.jpg" data-background-opacity="0.08">
+<h2>Лендинг за ночь</h2>
+<div class="flow">
+<div class="gc"><span class="em">💡</span><p>Описал идею вечером</p></div>
+<div class="fa">→</div>
+<div class="gc"><span class="em">🤖</span><p>Агент исследует, кодит, деплоит</p></div>
+<div class="fa">→</div>
+<div class="gc"><span class="em">🌅</span><p>Утром: рабочий сайт</p></div>
+</div>
+</section>
 
-            <!-- Слайд 14: Команда -->
-            <section data-background-image="img/team.jpg" data-background-opacity="0.15">
-                <div class="content-container">
-                    <h2>Один агент — хорошо. Команда — масштаб.</h2>
-                    
-                    <div class="grid grid-2">
-                        <div class="card">
-                            <div class="big-emoji">❌</div>
-                            <h3>Один агент = перегруз</h3>
-                            <p>Большой промпт, много обязанностей — качество страдает</p>
-                        </div>
-                        <div class="card accent">
-                            <div class="big-emoji">✅</div>
-                            <h3>Команда = каждый делает своё</h3>
-                            <p>Чёткий план на свою задачу — достойный результат</p>
-                        </div>
-                    </div>
-                    
-                    <div class="quote" style="margin-top: 2rem;">
-                        «Каждая задача — своему специалисту»
-                    </div>
-                </div>
-            </section>
+<!-- 13. ЕЩЁ ЮЗКЕЙСЫ -->
+<section data-background-image="img/content.jpg" data-background-opacity="0.08">
+<h2>И это только начало</h2>
+<div class="g3">
+<div class="gc"><span class="em">🏠</span><p>Умный дом через Telegram</p></div>
+<div class="gc"><span class="em">✈️</span><p>Путешествия: маршрут + бюджет</p></div>
+<div class="gc"><span class="em">💰</span><p>Финансы: чеки → учёт</p></div>
+<div class="gc"><span class="em">📱</span><p>Автопостинг в соцсети</p></div>
+<div class="gc"><span class="em">🔍</span><p>Мониторинг 100+ источников</p></div>
+<div class="gc"><span class="em">🤝</span><p>Торг при покупке авто</p></div>
+</div>
+</section>
 
-            <!-- Слайд 15: Роли -->
-            <section data-background-image="img/team.jpg" data-background-opacity="0.15">
-                <div class="content-container">
-                    <h2>Как выглядит команда</h2>
-                    
-                    <div class="grid grid-5" style="margin-bottom: 2rem;">
-                        <div class="card">
-                            <div class="big-emoji">🎯</div>
-                            <h3>Координатор/Opus</h3>
-                            <p>Декомпозирует задачи</p>
-                        </div>
-                        <div class="card">
-                            <div class="big-emoji">🔍</div>
-                            <h3>Ресёрчер/Haiku</h3>
-                            <p>Ищет факты и данные</p>
-                        </div>
-                        <div class="card">
-                            <div class="big-emoji">✍️</div>
-                            <h3>Копирайтер/Sonnet</h3>
-                            <p>Пишет тексты</p>
-                        </div>
-                        <div class="card">
-                            <div class="big-emoji">💻</div>
-                            <h3>Программист/Opus</h3>
-                            <p>Код и PDF</p>
-                        </div>
-                        <div class="card">
-                            <div class="big-emoji">⚖️</div>
-                            <h3>QA/Sonnet</h3>
-                            <p>Проверка качества</p>
-                        </div>
-                    </div>
-                    
-                    <p class="center-text">Отдельный Telegram-бот · Своя память · Свои скиллы</p>
-                </div>
-            </section>
+<!-- 14. КОМАНДА -->
+<section data-background-image="img/team.jpg" data-background-opacity="0.12">
+<h2>Один агент — хорошо.<br>Команда — масштаб.</h2>
+<div class="g2" style="max-width:800px">
+<div class="gc"><span class="em">❌</span><h3>Один = перегруз</h3><p>Большой промт, много обязанностей — нарушает и ошибается</p></div>
+<div class="gc bright"><span class="em">✅</span><h3>Команда = качество</h3><p>Каждый делает своё. Чёткий план — достойный результат</p></div>
+</div>
+<div class="quote" style="margin-top:1rem">«Каждая задача должна идти своему специалисту»</div>
+</section>
 
-            <!-- Слайд 16: Контролирующий слой -->
-            <section data-background-image="img/loop.jpg" data-background-opacity="0.15">
-                <div class="content-container">
-                    <h2>Контролирующий слой</h2>
-                    
-                    <div class="flow" style="margin-bottom: 2rem;">
-                        <div class="card">Задача</div>
-                        <div class="arrow">→</div>
-                        <div class="card">Координатор</div>
-                        <div class="arrow">→</div>
-                        <div class="card">Ресёрчер</div>
-                        <div class="arrow">→</div>
-                        <div class="card">Копирайтер</div>
-                        <div class="arrow">→</div>
-                        <div class="card">QA</div>
-                    </div>
-                    
-                    <div class="grid grid-2">
-                        <div class="flow">
-                            <div class="big-emoji">✅</div>
-                            <p>ОК</p>
-                            <div class="arrow">→</div>
-                            <div class="card accent">Результат</div>
-                        </div>
-                        <div class="flow">
-                            <div class="big-emoji">❌</div>
-                            <p>Ошибка</p>
-                            <div class="arrow">→</div>
-                            <div class="card">Доработка</div>
-                            <div class="arrow">→</div>
-                            <div class="card">Повторная проверка</div>
-                        </div>
-                    </div>
-                    
-                    <div class="quote">
-                        «Code review для любой задачи»
-                    </div>
-                </div>
-            </section>
+<!-- 15. РОЛИ -->
+<section data-background-image="img/team.jpg" data-background-opacity="0.08">
+<h2>Как выглядит команда</h2>
+<div class="g5">
+<div class="gc"><span class="em">🎯</span><h3>Координатор</h3><p style="color:var(--green);font-size:.85rem">Opus</p><p>Декомпозирует</p></div>
+<div class="gc"><span class="em">🔍</span><h3>Ресёрчер</h3><p style="color:var(--green);font-size:.85rem">Haiku</p><p>Ищет факты</p></div>
+<div class="gc"><span class="em">✍️</span><h3>Копирайтер</h3><p style="color:var(--green);font-size:.85rem">Sonnet</p><p>Тексты</p></div>
+<div class="gc"><span class="em">💻</span><h3>Программист</h3><p style="color:var(--green);font-size:.85rem">Opus</p><p>Код + PDF</p></div>
+<div class="gc"><span class="em">⚖️</span><h3>QA</h3><p style="color:var(--green);font-size:.85rem">Sonnet</p><p>Проверка</p></div>
+</div>
+<p style="margin-top:1rem;color:var(--t3)">Каждый — отдельный Telegram-бот · Своя память · Свои скиллы</p>
+</section>
 
-            <!-- Слайд 17: Свободный агент -->
-            <section data-background-image="img/freeagent.jpg" data-background-opacity="0.15">
-                <div class="content-container">
-                    <h2>Контроль без блокировки</h2>
-                    
-                    <div style="display: flex; flex-direction: column; gap: 2rem; align-items: center;">
-                        <p class="large-text center-text">Пока команда работает — один агент всегда свободен</p>
-                        <p class="large-text center-text">Срочный вопрос, проверка статуса, новая задача</p>
-                        <p class="large-text center-text highlight">Координатор занят → но у тебя есть горячая линия</p>
-                    </div>
-                </div>
-            </section>
+<!-- 16. КОНТРОЛИРУЮЩИЙ СЛОЙ -->
+<section data-background-image="img/loop.jpg" data-background-opacity="0.12">
+<h2>Контролирующий слой</h2>
+<div class="flow">
+<div class="gc"><p>Задача</p></div>
+<div class="fa">→</div>
+<div class="gc"><p>Координатор</p></div>
+<div class="fa">→</div>
+<div class="gc"><p>Ресёрчер</p></div>
+<div class="fa">→</div>
+<div class="gc"><p>Копирайтер</p></div>
+<div class="fa">→</div>
+<div class="gc"><p>QA</p></div>
+</div>
+<div class="g2" style="max-width:500px;margin-top:1rem">
+<div class="gc" style="border-color:var(--green)"><p><span style="color:var(--green)">✅ ОК</span> → Результат</p></div>
+<div class="gc" style="border-color:var(--blue)"><p><span style="color:var(--blue)">❌ Ошибка</span> → Доработка</p></div>
+</div>
+<div class="quote" style="margin-top:1rem">«Code review для любой задачи»</div>
+</section>
 
-            <!-- Слайд 18: Демо -->
-            <section data-background-image="img/demo.jpg" data-background-opacity="0.15">
-                <div class="content-container">
-                    <h2>Конвейер за 4 минуты</h2>
-                    
-                    <div class="timeline">
-                        <div class="timeline-item">
-                            <div class="timeline-time">25сек</div>
-                            <p>Ресёрчер нашёл 5 новостей</p>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-time">1мин</div>
-                            <p>Копирайтер написал пост</p>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-time">30сек</div>
-                            <p>QA: 3 замечания → возврат → ОК</p>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-time">2мин</div>
-                            <p>Программист оформил PDF</p>
-                        </div>
-                    </div>
-                    
-                    <div class="card accent" style="margin-top: 2rem;">
-                        <p class="center-text large-text">4 минуты · 5 агентов · 0 ручного труда</p>
-                    </div>
-                </div>
-            </section>
+<!-- 17. СВОБОДНЫЙ АГЕНТ -->
+<section data-background-image="img/freeagent.jpg" data-background-opacity="0.12">
+<h2>Контроль без блокировки</h2>
+<div class="gc" style="max-width:700px;margin:1rem auto"><p style="font-size:1.3rem;color:var(--t1)">Пока команда работает — <span style="color:var(--green)">один агент всегда свободен</span></p></div>
+<div class="gc" style="max-width:700px;margin:.5rem auto"><p style="font-size:1.3rem;color:var(--t1)">Срочный вопрос · Проверка статуса · Новая задача</p></div>
+<div class="gc" style="max-width:700px;margin:.5rem auto"><p style="font-size:1.3rem;color:var(--t1)">Координатор занят → у тебя есть <span style="color:var(--green)">горячая линия</span></p></div>
+</section>
 
-            <!-- Слайд 19: Тренды -->
-            <section data-background-image="img/trends.jpg" data-background-opacity="0.15">
-                <div class="content-container">
-                    <h2>Что дальше</h2>
-                    
-                    <div class="grid grid-2x2">
-                        <div class="card">
-                            <div class="big-emoji">🧩</div>
-                            <h3>ClawhHub.ai</h3>
-                            <p>Маркетплейс скиллов растёт</p>
-                        </div>
-                        <div class="card">
-                            <div class="big-emoji">👁️</div>
-                            <h3>Мультимодальность</h3>
-                            <p>Камера, голос, экран</p>
-                        </div>
-                        <div class="card">
-                            <div class="big-emoji">🤖</div>
-                            <h3>Команды агентов</h3>
-                            <p>Из десятков специалистов</p>
-                        </div>
-                        <div class="card">
-                            <div class="big-emoji">🔌</div>
-                            <h3>MCP-протокол</h3>
-                            <p>Стандарт подключения к любому сервису</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+<!-- 18. ДЕМО -->
+<section data-background-image="img/demo.jpg" data-background-opacity="0.1">
+<h2>Конвейер за 4 минуты</h2>
+<div class="tl">
+<div class="gc tl-item"><span class="tl-time">25 сек</span><span class="tl-act">🔍 Ресёрчер нашёл 5 новостей</span></div>
+<div class="gc tl-item"><span class="tl-time">1 мин</span><span class="tl-act">✍️ Копирайтер написал пост</span></div>
+<div class="gc tl-item"><span class="tl-time">30 сек</span><span class="tl-act">⚖️ QA: 3 замечания → доработка → ОК</span></div>
+<div class="gc tl-item"><span class="tl-time">2 мин</span><span class="tl-act">💻 Программист оформил PDF</span></div>
+</div>
+<p style="margin-top:1rem;font-size:1.4rem;color:var(--green)"><strong>4 минуты · 5 агентов · 0 ручного труда</strong></p>
+</section>
 
-            <!-- Слайд 20: Ресурсы -->
-            <section data-background-image="img/setup.jpg" data-background-opacity="0.15">
-                <div class="content-container">
-                    <h2>Полезные ресурсы</h2>
-                    
-                    <div class="grid grid-3" style="margin-bottom: 2rem;">
-                        <div class="card">
-                            <div class="big-emoji">🚀</div>
-                            <h3>openclaw.ai</h3>
-                            <p>Быстрая установка и настройка</p>
-                        </div>
-                        <div class="card">
-                            <div class="big-emoji">📚</div>
-                            <h3>docs.openclaw.ai</h3>
-                            <p>Документация и пошаговые гайды</p>
-                        </div>
-                        <div class="card">
-                            <div class="big-emoji">🧩</div>
-                            <h3>clawhub.ai</h3>
-                            <p>Маркетплейс готовых Skills</p>
-                        </div>
-                    </div>
-                    
-                    <div class="card">
-                        <p class="center-text">OpenClaw — open-source AI-агент, который работает в Telegram, помнит контекст и автоматизирует задачи. Бесплатный.</p>
-                    </div>
-                </div>
-            </section>
+<!-- 19. ТРЕНДЫ -->
+<section data-background-image="img/trends.jpg" data-background-opacity="0.12">
+<h2>Что дальше</h2>
+<div class="g2" style="max-width:800px">
+<div class="gc"><span class="em">🧩</span><h3>ClawhHub.ai</h3><p>Маркетплейс скиллов растёт</p></div>
+<div class="gc"><span class="em">👁️</span><h3>Мультимодальность</h3><p>Камера · Голос · Экран</p></div>
+<div class="gc"><span class="em">🤖</span><h3>Команды агентов</h3><p>Десятки агентов вместе</p></div>
+<div class="gc"><span class="em">🔌</span><h3>MCP-протокол</h3><p>Стандарт подключения к любому сервису</p></div>
+</div>
+</section>
 
-            <!-- Слайд 21: Сообщество -->
-            <section data-background-image="img/community.jpg" data-background-opacity="0.15">
-                <div class="content-container">
-                    <h2>Присоединяйтесь к AI First</h2>
-                    
-                    <div class="card accent" style="margin-bottom: 2rem; padding: 3rem;">
-                        <p class="large-text center-text">
-                            Регулярные встречи · Разбор кейсов · Помощь с настройкой ·<br>
-                            Обмен опытом · Поддержка сообщества
-                        </p>
-                    </div>
-                    
-                    <p class="subtitle">Алексей Южанинов · AI First</p>
-                    <p class="large-text center-text highlight">Записывайтесь на следующую встречу!</p>
-                </div>
-            </section>
+<!-- 20. РЕСУРСЫ -->
+<section data-background-image="img/setup.jpg" data-background-opacity="0.08">
+<h2>Полезные ресурсы</h2>
+<div class="g3" style="max-width:800px">
+<div class="gc"><span class="em">🚀</span><h3>openclaw.ai</h3><p>Установка</p></div>
+<div class="gc"><span class="em">📚</span><h3>docs.openclaw.ai</h3><p>Документация и гайды</p></div>
+<div class="gc"><span class="em">🧩</span><h3>clawhub.ai</h3><p>Маркетплейс Skills</p></div>
+</div>
+<div class="gc" style="max-width:800px;margin:1.5rem auto"><p style="font-size:1.1rem;color:var(--t1)">OpenClaw — open-source AI-агент в Telegram.<br>Помнит контекст, автоматизирует задачи. Бесплатный.</p></div>
+</section>
 
-        </div>
-    </div>
+<!-- 21. СООБЩЕСТВО -->
+<section data-background-image="img/community.jpg" data-background-opacity="0.15">
+<h2>Присоединяйтесь к AI First</h2>
+<div class="gc" style="max-width:700px;margin:1.5rem auto">
+<p style="font-size:1.3rem;color:var(--t1);line-height:2">
+🗓 Регулярные встречи<br>
+🔍 Разбор кейсов<br>
+🛠 Помощь с настройкой<br>
+💬 Обмен опытом<br>
+🤝 Поддержка сообщества
+</p>
+</div>
+<p style="font-size:1.5rem;color:var(--green);margin-top:1rem"><strong>Записывайтесь на следующую встречу!</strong></p>
+<p style="color:var(--t2);margin-top:1rem">Алексей Южанинов · AI First</p>
+</section>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.js"></script>
-    <script>
-        Reveal.initialize({
-            hash: true,
-            controls: true,
-            progress: true,
-            center: true,
-            transition: 'slide',
-            slideNumber: 'c/t',
-            fragments: false,
-            mouseWheel: false,
-            touch: true,
-            keyboard: true
-        });
-    </script>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+Reveal.initialize({
+  hash:true,
+  controls:true,
+  progress:true,
+  center:true,
+  transition:'slide',
+  slideNumber:'c/t',
+  fragments:false,
+  touch:true,
+  keyboard:true
+});
+</script>
 </body>
 </html>
