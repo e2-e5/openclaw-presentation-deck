@@ -82,11 +82,11 @@
 
 <!-- 2. КОНТЕКСТ -->
 <section data-background-image="img/hero.jpg" data-background-opacity="0.1">
-<div class="quote">«В следующие 10 лет каждая компания станет AI-компанией. Тот, кто не начнёт — исчезнет.»<br><span style="color:var(--t3);font-style:normal;font-size:.9rem">— Jensen Huang, NVIDIA</span></div>
+<div class="quote">«Every company in the world today needs to have an OpenClaw strategy, an agentic system strategy. This is the new computer.»<br><span style="color:var(--t3);font-style:normal;font-size:.9rem">— Jensen Huang, NVIDIA (March 2026)</span></div>
 <div class="g3">
-<div class="gc"><span class="sn">68K+</span><p>GitHub stars за 3 мес</p></div>
+<div class="gc"><span class="sn">330K+</span><p>GitHub stars за 3 мес</p></div>
 <div class="gc"><span class="sn">Forbes</span><p>DigitalOcean, KDnuggets</p></div>
-<div class="gc"><span class="sn">#1</span><p>AI-инструмент 2026</p></div>
+<div class="gc"><span class="sn">#1</span><p>Обогнал Linux и React</p></div>
 </div>
 </section>
 
@@ -131,15 +131,44 @@
 
 <!-- 6. АРХИТЕКТУРА -->
 <section data-background-image="img/arch.jpg" data-background-opacity="0.12">
-<h2>Как устроено</h2>
-<div style="max-width:500px;margin:0 auto">
-<div class="gc"><p style="font-size:1.2rem;color:var(--t1)">📱 Telegram / Slack / WhatsApp</p></div>
-<div class="fa">↕</div>
-<div class="gc"><p style="font-size:1.2rem;color:var(--t1)">⚡ OpenClaw Gateway</p></div>
-<div class="fa">↕</div>
-<div class="gc"><p style="font-size:1.2rem;color:var(--t1)">🧠 AI мозг: Claude / GPT / Gemini</p></div>
-<div class="fa">↕</div>
-<div class="gc"><p style="font-size:1.2rem;color:var(--t1)">🔧 Браузер · Email · Файлы · API · Cron</p></div>
+<h2>Как устроено: Архитектура</h2>
+<div style="display:grid; grid-template-columns: 1fr 2fr 1fr; gap: 1.5rem; max-width: 1100px; margin: 2rem auto; align-items: center;">
+    
+    <!-- Интерфейсы -->
+    <div style="display:flex; flex-direction:column; gap: 0.8rem;">
+        <div style="color:var(--t3); font-size:0.9rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:0.5rem;">Интерфейс (Ты)</div>
+        <div class="gc" style="border-color:var(--blue); padding:1rem;"><span class="em" style="font-size:1.5rem; margin-bottom:0.2rem;">📱</span>Telegram</div>
+        <div class="gc" style="border-color:var(--blue); padding:1rem;"><span class="em" style="font-size:1.5rem; margin-bottom:0.2rem;">💼</span>Slack</div>
+        <div class="gc" style="border-color:var(--blue); padding:1rem;"><span class="em" style="font-size:1.5rem; margin-bottom:0.2rem;">💬</span>WhatsApp</div>
+    </div>
+
+    <!-- Ядро -->
+    <div style="display:flex; flex-direction:column; justify-content:center; position:relative;">
+        <div class="fa" style="position:absolute; left:-1.5rem; top:50%; transform:translateY(-50%);">→</div>
+        <div class="gc bright" style="padding:2rem 1.5rem;">
+            <div style="color:var(--t3); font-size:0.9rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:1rem;">Ядро (OpenClaw)</div>
+            <span class="sn" style="font-size:1.8rem; margin-bottom:1rem;">Gateway Server</span>
+            <div style="display:flex; justify-content:center; gap:1rem; margin-bottom:1.5rem;">
+                <div style="background:rgba(255,255,255,0.1); padding:0.4rem 0.8rem; border-radius:6px; font-size:0.9rem;">Память</div>
+                <div style="background:rgba(255,255,255,0.1); padding:0.4rem 0.8rem; border-radius:6px; font-size:0.9rem;">Роутинг</div>
+                <div style="background:rgba(255,255,255,0.1); padding:0.4rem 0.8rem; border-radius:6px; font-size:0.9rem;">Heartbeat</div>
+            </div>
+            <div style="display:flex; align-items:center; justify-content:center; gap:0.5rem; border-top:1px solid rgba(255,255,255,0.1); padding-top:1rem;">
+                <span style="font-size:1.2rem;">🧠</span>
+                <span style="color:var(--t1); font-weight:600;">LLM Мозг:</span>
+                <span style="color:var(--t2);">Claude / Gemini / GPT</span>
+            </div>
+        </div>
+        <div class="fa" style="position:absolute; right:-1.5rem; top:50%; transform:translateY(-50%);">→</div>
+    </div>
+
+    <!-- Инструменты -->
+    <div style="display:flex; flex-direction:column; gap: 0.8rem;">
+        <div style="color:var(--t3); font-size:0.9rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:0.5rem;">Действия (Мир)</div>
+        <div class="gc" style="border-color:var(--green); padding:1rem;"><span class="em" style="font-size:1.5rem; margin-bottom:0.2rem;">🌐</span>Браузер</div>
+        <div class="gc" style="border-color:var(--green); padding:1rem;"><span class="em" style="font-size:1.5rem; margin-bottom:0.2rem;">⌨️</span>Код (Терминал)</div>
+        <div class="gc" style="border-color:var(--green); padding:1rem;"><span class="em" style="font-size:1.5rem; margin-bottom:0.2rem;">🧩</span>Skills / API</div>
+    </div>
 </div>
 </section>
 
