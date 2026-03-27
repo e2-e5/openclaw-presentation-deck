@@ -2,721 +2,265 @@
 <html lang="ru">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OpenClaw: ваш первый цифровой сотрудник</title>
     
-    <!-- Reveal.js 5.1.0 CDN -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/night.css">
-    
-    <!-- Google Fonts: Space Grotesk + Manrope -->
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/theme/black.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-primary: #08090d;
-            --text-primary: #F6F7FB;
-            --text-secondary: rgba(246,247,251,0.7);
-            --text-muted: rgba(246,247,251,0.6);
-            --accent-blue: #0066FF;
-            --accent-green: #00FFB7;
-            --accent-purple: #8B5CF6;
-            --glass-bg: rgba(255,255,255,0.04);
-            --glass-border: rgba(255,255,255,0.08);
-            --glass-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            --primary-bg: #08090d;
+            --accent-color: #00FFB7;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.8);
+            --card-bg: rgba(255, 255, 255, 0.06);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --gradient-blue: #4F90E8;
+            --gradient-green: #00FFB7;
         }
-        
-        /* Noise texture background */
-        body {
-            background: var(--bg-primary);
-            background-image: 
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
-        }
-        
-        .reveal {
-            font-family: 'Manrope', sans-serif;
-            color: var(--text-primary);
-            font-weight: 400;
-            background: transparent;
-        }
-        
+
         .reveal .slides {
-            text-align: left;
+            background-color: var(--primary-bg) !important;
         }
         
-        .reveal .slides section {
-            padding: 2rem 2rem;
-            overflow: hidden;
-            box-sizing: border-box;
-        }
-        
-        .reveal .slides section > * {
-            max-width: 100%;
-        }
-        
-        /* Typography */
-        .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-green) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
-        }
-        
-        .reveal h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            margin-bottom: 1.5rem;
-        }
-        
-        .reveal h2 {
-            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-            margin-bottom: 1.5rem;
-        }
-        
-        .reveal h3 {
-            font-size: clamp(1.2rem, 2vw, 1.8rem);
-            margin-bottom: 1rem;
-        }
-        
-        .reveal .subtitle {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 500;
-            color: var(--text-secondary);
-            font-size: 1.3rem;
-            margin-top: 2rem;
-        }
-        
-        .reveal p, .reveal li {
-            color: var(--text-muted);
-            font-size: 1.2rem;
-            line-height: 1.6;
-            margin: 0.8rem 0;
-        }
-        
-        .reveal strong {
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-        
-        /* Glassmorphism cards */
-        .glass-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            backdrop-filter: blur(16px);
-            padding: 2rem;
-            margin: 1rem 0;
-            box-shadow: var(--glass-shadow);
-            position: relative;
-        }
-        
-        /* Gradient halos */
-        .halo-blue::before {
-            content: '';
-            position: absolute;
-            top: -50px;
-            left: -50px;
-            right: -50px;
-            bottom: -50px;
-            background: radial-gradient(circle, rgba(0,102,255,0.15) 0%, transparent 70%);
-            z-index: -1;
-            border-radius: 50%;
-        }
-        
-        .halo-green::before {
-            content: '';
-            position: absolute;
-            top: -50px;
-            left: -50px;
-            right: -50px;
-            bottom: -50px;
-            background: radial-gradient(circle, rgba(0,255,183,0.15) 0%, transparent 70%);
-            z-index: -1;
-            border-radius: 50%;
-        }
-        
-        /* Background images for slides */
-        .slide-hero {
-            background-image: linear-gradient(rgba(8,9,13,0.8), rgba(8,9,13,0.95)), url('img/hero.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
-        
-        .slide-evolution {
-            background-image: linear-gradient(rgba(8,9,13,0.85), rgba(8,9,13,0.85)), url('img/evolution.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
-        
-        .slide-arch {
-            background-image: linear-gradient(rgba(8,9,13,0.85), rgba(8,9,13,0.85)), url('img/arch.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
-        
-        .slide-usecases {
-            background-image: linear-gradient(rgba(8,9,13,0.85), rgba(8,9,13,0.85)), url('img/usecases.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
-        
-        .slide-team {
-            background-image: linear-gradient(rgba(8,9,13,0.85), rgba(8,9,13,0.85)), url('img/team.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
-        
-        .slide-loop {
-            background-image: linear-gradient(rgba(8,9,13,0.85), rgba(8,9,13,0.85)), url('img/loop.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
-        
-        /* Title slide styles */
-        .title-slide {
-            text-align: center !important;
-            display: flex !important;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        
-        .title-slide h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            margin-bottom: 1rem;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.5);
-        }
-        
-        /* Stats cards */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-        
-        .stat-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            backdrop-filter: blur(16px);
-            padding: 2rem;
-            text-align: center;
-            box-shadow: var(--glass-shadow);
-            position: relative;
-        }
-        
-        .stat-number {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 3rem;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-        
-        /* Generation comparison cards */
-        .generation-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-        
-        .gen-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            backdrop-filter: blur(16px);
-            padding: 2rem;
-            box-shadow: var(--glass-shadow);
-            position: relative;
-        }
-        
-        .gen-card.chatgpt {
-            opacity: 0.6;
-            border-color: rgba(255,255,255,0.04);
-        }
-        
-        .gen-card.claude-code {
-            border-color: rgba(0,102,255,0.3);
-        }
-        
-        .gen-card.openclaw {
-            border-color: var(--accent-green);
-            box-shadow: 0 0 40px rgba(0,255,183,0.2), var(--glass-shadow);
-        }
-        
-        .gen-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-        
-        .gen-card ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        
-        .gen-card li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-            font-size: 1rem;
-        }
-        
-        .gen-card li:last-child {
-            border-bottom: none;
-        }
-        
-        /* Metaphor blocks */
-        .metaphor-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-        
-        .metaphor-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            backdrop-filter: blur(16px);
-            padding: 2.5rem;
-            text-align: center;
-            box-shadow: var(--glass-shadow);
-        }
-        
-        .metaphor-emoji {
-            font-size: 4rem;
-            display: block;
-            margin-bottom: 1.5rem;
-        }
-        
-        .metaphor-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 600;
-            font-size: 1.3rem;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-        }
-        
-        /* Architecture diagram */
-        .arch-flow {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5rem;
-            margin: 3rem 0;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .arch-level {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            backdrop-filter: blur(16px);
-            padding: 1.5rem 3rem;
-            box-shadow: var(--glass-shadow);
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 600;
-            font-size: 1.2rem;
-            color: var(--text-primary);
-            text-align: center;
-            min-width: 300px;
-        }
-        
-        .arch-arrow {
-            font-size: 2rem;
-            color: var(--accent-green);
-            font-weight: 700;
-        }
-        
-        /* Steps grid */
-        .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.8rem;
-            margin: 1rem 0;
-        }
-        
-        .step-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 14px;
-            backdrop-filter: blur(16px);
-            padding: 0.8rem 1.2rem;
-            box-shadow: var(--glass-shadow);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .step-number {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 1.8rem;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            min-width: 60px;
-            text-align: center;
-        }
-        
-        .step-text {
-            font-size: 1.1rem;
-            color: var(--text-primary);
-        }
-        
-        /* Use cases bento grid */
-        .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: repeat(2, auto);
-            gap: 0.8rem;
-            margin: 1.5rem 0;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .bento-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 14px;
-            backdrop-filter: blur(16px);
-            padding: 1rem;
-            box-shadow: var(--glass-shadow);
-            font-size: 0.95rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-        
-        .bento-emoji {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .bento-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 600;
-            color: var(--text-primary);
-            font-size: 1rem;
-        }
-        
-        .bento-desc {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            line-height: 1.4;
-        }
-        
-        /* Roles table as cards */
-        .roles-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin: 3rem 0;
-        }
-        
-        .role-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            backdrop-filter: blur(16px);
-            padding: 2rem;
-            box-shadow: var(--glass-shadow);
-        }
-        
-        .role-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-        }
-        
-        .role-name {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 1.3rem;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .role-model {
-            background: var(--accent-blue);
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 8px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        
-        /* Workflow diagram */
-        .workflow-container {
-            margin: 3rem 0;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .workflow-main {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            margin: 2rem 0;
-            flex-wrap: wrap;
-        }
-        
-        .workflow-step {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            backdrop-filter: blur(16px);
-            padding: 1rem 1.5rem;
-            box-shadow: var(--glass-shadow);
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 600;
-            color: var(--text-primary);
-            font-size: 1rem;
-        }
-        
-        .workflow-arrow {
-            color: var(--accent-green);
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-        
-        .workflow-branches {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 2rem;
-        }
-        
-        .workflow-branch {
-            text-align: center;
-        }
-        
-        .workflow-ok {
-            color: var(--accent-green);
-            font-weight: 600;
-        }
-        
-        .workflow-error {
-            color: var(--accent-blue);
-            font-weight: 600;
-        }
-        
-        /* Timeline for demo */
-        .timeline {
-            margin: 3rem 0;
-        }
-        
-        .timeline-item {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            backdrop-filter: blur(16px);
-            padding: 1.5rem;
-            margin: 1rem 0;
-            box-shadow: var(--glass-shadow);
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
-        
-        .timeline-time {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 1.1rem;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            min-width: 100px;
-        }
-        
-        .timeline-action {
-            color: var(--text-primary);
-            font-size: 1.1rem;
-        }
-        
-        /* CTA section */
-        .cta-container {
-            text-align: center;
-            margin: 3rem 0;
-        }
-        
-        .cta-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 3.5rem;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 2rem;
-        }
-        
-        .cta-links {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-        
-        .cta-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            backdrop-filter: blur(16px);
-            padding: 2rem;
-            box-shadow: var(--glass-shadow);
-            text-decoration: none;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: block;
-        }
-        
-        .cta-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 0 40px rgba(0,255,183,0.2), var(--glass-shadow);
-        }
-        
-        .cta-card-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 600;
-            font-size: 1.2rem;
-            color: var(--accent-green);
-            margin-bottom: 0.5rem;
-        }
-        
-        .cta-card-desc {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-        
-        /* Quotes */
-        .quote {
-            background: rgba(0,255,183,0.05);
-            border-left: 3px solid var(--accent-green);
-            padding: 1.5rem 2rem;
-            margin: 2rem 0;
-            border-radius: 0 16px 16px 0;
-            font-style: italic;
-            font-size: 1.3rem;
-            line-height: 1.6;
-            color: var(--text-primary);
-        }
-        
-        /* Reveals customization */
-        .reveal .progress {
-            color: var(--accent-green);
-            background: linear-gradient(90deg, var(--accent-blue), var(--accent-green));
-            height: 3px;
+        .reveal .progress span {
+            background: var(--accent-color);
         }
         
         .reveal .controls {
-            color: rgba(246,247,251,0.8);
-            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+            color: var(--accent-color);
         }
-        
-        .reveal .slide-number {
-            background: rgba(8,9,13,0.8);
-            backdrop-filter: blur(8px);
+
+        .reveal section {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            align-items: center !important;
+            text-align: center !important;
+            min-height: 100vh !important;
+            box-sizing: border-box;
+            padding: 2rem;
+        }
+
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'Space Grotesk', sans-serif !important;
+            font-weight: 700 !important;
+            font-size: clamp(2rem, 4vw, 3rem) !important;
+            background: linear-gradient(135deg, var(--gradient-blue) 0%, var(--gradient-green) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem !important;
+            line-height: 1.2 !important;
+        }
+
+        .reveal p, .reveal li {
+            font-family: 'Manrope', sans-serif !important;
+            font-size: 1.4rem !important;
+            line-height: 1.6 !important;
+            color: var(--text-secondary) !important;
+        }
+
+        .content-container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s ease;
+            text-align: left;
+            width: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .card.accent {
+            border: 2px solid var(--accent-color);
+            background: rgba(0, 255, 183, 0.1);
+        }
+
+        .card.dim {
+            opacity: 0.6;
+        }
+
+        .card h3 {
+            margin-bottom: 1rem !important;
+            font-size: 1.6rem !important;
+        }
+
+        .card p {
+            margin: 0 !important;
+            font-size: 1.2rem !important;
+        }
+
+        .grid {
+            display: grid;
+            width: 100%;
+            gap: 1rem;
+        }
+
+        .grid-2 { grid-template-columns: repeat(2, 1fr); }
+        .grid-3 { grid-template-columns: repeat(3, 1fr); }
+        .grid-4 { grid-template-columns: repeat(4, 1fr); }
+        .grid-5 { grid-template-columns: repeat(5, 1fr); }
+        .grid-2x2 { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(2, 1fr); }
+        .grid-2x3 { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(3, 1fr); }
+        .grid-2x4 { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(4, 1fr); }
+        .grid-2x5 { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(5, 1fr); }
+
+        .quote {
+            background: rgba(0, 255, 183, 0.05);
+            border-left: 3px solid var(--accent-color);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+            font-style: italic;
+            font-size: 1.8rem !important;
+            color: var(--text-primary) !important;
+        }
+
+        .quote-author {
+            font-size: 1.2rem !important;
+            margin-top: 1rem;
+            opacity: 0.8;
+        }
+
+        .big-emoji {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.6rem !important;
+            color: var(--text-secondary) !important;
+            margin-bottom: 3rem !important;
+        }
+
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            width: 100%;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--card-bg);
             border-radius: 12px;
+            border: 1px solid var(--card-border);
+        }
+
+        .timeline-time {
+            background: var(--accent-color);
+            color: var(--primary-bg);
             padding: 0.5rem 1rem;
-            color: rgba(246,247,251,0.8);
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 500;
-            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            font-weight: bold;
+            min-width: 80px;
         }
-        
-        /* Slide content entrance animation */
-        .reveal .slides section.present > * {
-            animation: slideContentIn 0.6s ease-out both;
+
+        .arrow {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin: 0 1rem;
         }
-        
-        .reveal .slides section.present > *:nth-child(1) { animation-delay: 0s; }
-        .reveal .slides section.present > *:nth-child(2) { animation-delay: 0.1s; }
-        .reveal .slides section.present > *:nth-child(3) { animation-delay: 0.2s; }
-        .reveal .slides section.present > *:nth-child(4) { animation-delay: 0.3s; }
-        .reveal .slides section.present > *:nth-child(5) { animation-delay: 0.4s; }
-        
-        @keyframes slideContentIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+
+        .flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            width: 100%;
         }
-        
-        /* Responsive */
-        @media (max-width: 1200px) {
-            .generation-grid {
-                grid-template-columns: 1fr;
+
+        .flow .card {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .title-slide h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem) !important;
+            margin-bottom: 1rem !important;
+        }
+
+        .title-slide .subtitle {
+            font-size: 1.8rem !important;
+        }
+
+        /* Slide entrance animation */
+        .reveal .slides section {
+            opacity: 0;
+            animation: slideIn 0.8s ease-out forwards;
+        }
+
+        .reveal .slides section.present {
+            opacity: 1;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
             }
-            
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .bento-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .cta-links {
-                grid-template-columns: 1fr;
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
-        
+
+        .highlight {
+            color: var(--accent-color) !important;
+            font-weight: 600;
+        }
+
+        .center-text {
+            text-align: center !important;
+        }
+
+        .large-text {
+            font-size: 2rem !important;
+            color: var(--text-primary) !important;
+        }
+
+        /* Responsive adjustments */
         @media (max-width: 768px) {
-            .reveal h1 {
-                font-size: 3rem;
-            }
-            
-            .reveal h2 {
-                font-size: 2.2rem;
-            }
-            
-            .title-slide h1 {
-                font-size: 3.5rem;
-            }
-            
-            .metaphor-grid {
+            .grid-3, .grid-4, .grid-5 {
                 grid-template-columns: 1fr;
             }
             
-            .steps-grid {
+            .grid-2x2, .grid-2x3, .grid-2x4, .grid-2x5 {
                 grid-template-columns: 1fr;
             }
             
-            .roles-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .workflow-main {
+            .flow {
                 flex-direction: column;
-            }
-            
-            .bento-grid {
-                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -726,561 +270,630 @@
     <div class="reveal">
         <div class="slides">
             
-            <!-- Слайд 1: Титульный -->
-            <section class="title-slide slide-hero">
-                <h1>OpenClaw: ваш первый цифровой сотрудник</h1>
-                <div class="subtitle">
-                    AI First · Алексей Южанинов · Март 2026
+            <!-- Слайд 1: Титул -->
+            <section data-background-image="img/hero.jpg" data-background-opacity="0.15">
+                <div class="content-container title-slide">
+                    <h1>OpenClaw: ваш первый цифровой сотрудник</h1>
+                    <p class="subtitle">AI First · Алексей Южанинов · Март 2026</p>
                 </div>
             </section>
 
             <!-- Слайд 2: Контекст -->
-            <section>
-                <h2>Контекст — что происходит прямо сейчас</h2>
-                
-                <div class="quote">
-                    Jensen Huang: «Каждой компании нужна OpenClaw-стратегия. Это новый компьютер.»
-                </div>
-                
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <span class="stat-number">68K+</span>
-                        <div>GitHub stars</div>
+            <section data-background-image="img/hero.jpg" data-background-opacity="0.15">
+                <div class="content-container">
+                    <div class="quote">
+                        "В следующие 10 лет каждая компания станет AI-компанией. Те, кто не адаптируется, исчезнут."
+                        <div class="quote-author">— Jensen Huang, NVIDIA</div>
                     </div>
-                    <div class="stat-card">
-                        <span class="stat-number">Forbes</span>
-                        <div>DigitalOcean, KDnuggets</div>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-number">#1</span>
-                        <div>Самый горячий AI-инструмент 2026</div>
+                    
+                    <div class="grid grid-3">
+                        <div class="card">
+                            <h3>68K+ GitHub stars</h3>
+                            <p>Самый популярный AI-агент</p>
+                        </div>
+                        <div class="card">
+                            <h3>Forbes, DigitalOcean, KDnuggets</h3>
+                            <p>Топ списки инструментов</p>
+                        </div>
+                        <div class="card">
+                            <h3>#1 AI-инструмент 2026</h3>
+                            <p>По версии ProductHunt</p>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Слайд 3: Три поколения AI -->
-            <section class="slide-evolution">
-                <h2>Три поколения AI</h2>
-                
-                <div class="generation-grid">
-                    <div class="gen-card chatgpt">
-                        <div class="gen-title">ChatGPT (2023)</div>
-                        <ul>
-                            <li>☁️ Облако</li>
-                            <li>💭 Советует</li>
-                            <li>🧠 Слабая память</li>
-                            <li>❌ Нет автономности</li>
-                            <li>🔌 Плагины</li>
-                        </ul>
+            <!-- Слайд 3: Три поколения -->
+            <section data-background-image="img/evolution.jpg" data-background-opacity="0.15">
+                <div class="content-container">
+                    <h2>Три поколения ИИ-помощников</h2>
+                    
+                    <div class="grid grid-3">
+                        <div class="card dim">
+                            <h3>ChatGPT</h3>
+                            <p>• Работает в облаке</p>
+                            <p>• Только советует</p>
+                            <p>• Слабая память</p>
+                            <p>• Нет автономности</p>
+                        </div>
+                        <div class="card">
+                            <h3>Claude Code</h3>
+                            <p>• Работает локально</p>
+                            <p>• Пишет код</p>
+                            <p>• Контекст файлов</p>
+                            <p>• Только по запросу</p>
+                        </div>
+                        <div class="card accent">
+                            <h3>OpenClaw</h3>
+                            <p>• Работает везде</p>
+                            <p>• Действует самостоятельно</p>
+                            <p>• Персистентная память</p>
+                            <p>• Heartbeat каждые 30 минут</p>
+                        </div>
                     </div>
                     
-                    <div class="gen-card claude-code">
-                        <div class="gen-title">Claude Code (2025)</div>
-                        <ul>
-                            <li>💻 Локально</li>
-                            <li>⚙️ Кодит</li>
-                            <li>📁 Контекст файлов</li>
-                            <li>👋 По запросу</li>
-                            <li>🛠️ Файлы+терминал</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="gen-card openclaw halo-green">
-                        <div class="gen-title">OpenClaw (2026)</div>
-                        <ul>
-                            <li>🌐 Везде</li>
-                            <li>🚀 Действует</li>
-                            <li>💾 Персистентная память</li>
-                            <li>⏰ Heartbeat 30мин</li>
-                            <li>🔧 Браузер+API+email+cron+skills</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="glass-card" style="text-align: center; margin-top: 2rem;">
-                    <strong style="color: var(--accent-green); font-size: 1.5rem;">
-                        ChatGPT — чат. Claude Code — кодер. OpenClaw — сотрудник.
-                    </strong>
+                    <p class="large-text center-text">ChatGPT — чат. Claude Code — кодер. OpenClaw — сотрудник.</p>
                 </div>
             </section>
 
-            <!-- Слайд 4: Простая метафора -->
-            <section>
-                <h2>Простая метафора</h2>
-                
-                <div class="metaphor-grid">
-                    <div class="metaphor-card">
-                        <span class="metaphor-emoji">💬</span>
-                        <div class="metaphor-title">ChatGPT</div>
-                        <p>переписываться с консультантом</p>
+            <!-- Слайд 4: Метафора -->
+            <section data-background-image="img/hero.jpg" data-background-opacity="0.15">
+                <div class="content-container">
+                    <h2>Простая метафора</h2>
+                    
+                    <div class="grid grid-3">
+                        <div class="card">
+                            <div class="big-emoji">💬</div>
+                            <h3>ChatGPT = консультант</h3>
+                            <p>Даёт советы, но ничего не делает</p>
+                        </div>
+                        <div class="card">
+                            <div class="big-emoji">💻</div>
+                            <h3>Claude Code = программист</h3>
+                            <p>Сидит за ноутбуком, кодит по ТЗ</p>
+                        </div>
+                        <div class="card accent">
+                            <div class="big-emoji">🚀</div>
+                            <h3>OpenClaw = сотрудник</h3>
+                            <p>У него телефон и доступы ко всем системам</p>
+                        </div>
                     </div>
                     
-                    <div class="metaphor-card">
-                        <span class="metaphor-emoji">📎</span>
-                        <div class="metaphor-title">Claude Code</div>
-                        <p>программист за ноутбуком</p>
-                    </div>
-                    
-                    <div class="metaphor-card halo-green">
-                        <span class="metaphor-emoji">🚀</span>
-                        <div class="metaphor-title">OpenClaw</div>
-                        <p>сотрудник с телефоном и доступами</p>
-                    </div>
-                </div>
-                
-                <div class="glass-card" style="text-align: center; margin-top: 2rem;">
-                    <p style="font-size: 1.4rem; font-weight: 600;">
-                        Он не просто отвечает — он <span style="color: var(--accent-green);">ДЕЛАЕТ</span>
-                    </p>
+                    <p class="large-text center-text highlight">Он не просто отвечает — он ДЕЛАЕТ</p>
                 </div>
             </section>
 
-            <!-- Слайд 5: Почему это важно -->
-            <section>
-                <h2>Почему это важно для предпринимателей</h2>
-                
-                <ul style="font-size: 1.4rem; line-height: 2; margin: 3rem 0;">
-                    <li>Разрыв «хочу попробовать ИИ» → «ИИ работает на меня» огромный</li>
-                    <li><strong>ChatGPT</strong> = советчик. <strong style="color: var(--accent-green);">OpenClaw</strong> = исполнитель.</li>
-                    <li>Задача в Telegram → агент выполняет</li>
-                </ul>
+            <!-- Слайд 5: Почему важно -->
+            <section data-background-image="img/hero.jpg" data-background-opacity="0.15">
+                <div class="content-container">
+                    <h2>Почему это важно</h2>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 2rem; align-items: center;">
+                        <p class="large-text center-text">Разрыв огромный</p>
+                        <p class="large-text center-text">ChatGPT = советчик. OpenClaw = исполнитель.</p>
+                        <p class="large-text center-text highlight">Задача в Telegram → агент выполняет</p>
+                    </div>
+                </div>
             </section>
 
             <!-- Слайд 6: Архитектура -->
-            <section class="slide-arch">
-                <h2>Как устроено — архитектура</h2>
-                
-                <div class="arch-flow">
-                    <div class="arch-level">Telegram / Slack / WhatsApp</div>
-                    <div class="arch-arrow">↕</div>
-                    <div class="arch-level">OpenClaw Gateway</div>
-                    <div class="arch-arrow">↕</div>
-                    <div class="arch-level">AI мозг (Claude/GPT/Gemini)</div>
-                    <div class="arch-arrow">↕</div>
-                    <div class="arch-level">Инструменты (браузер, email, файлы, API, cron)</div>
+            <section data-background-image="img/arch.jpg" data-background-opacity="0.15">
+                <div class="content-container">
+                    <h2>Архитектура решения</h2>
+                    
+                    <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem; width: 100%;">
+                        <div class="card" style="width: 80%;">
+                            <h3 class="center-text">Telegram / Slack / WhatsApp</h3>
+                        </div>
+                        <div class="arrow">↕</div>
+                        <div class="card" style="width: 80%;">
+                            <h3 class="center-text">OpenClaw Gateway</h3>
+                        </div>
+                        <div class="arrow">↕</div>
+                        <div class="card" style="width: 80%;">
+                            <h3 class="center-text">AI мозг (Claude / GPT / Gemini)</h3>
+                        </div>
+                        <div class="arrow">↕</div>
+                        <div class="card" style="width: 80%;">
+                            <h3 class="center-text">Инструменты (браузер, email, файлы, API, cron)</h3>
+                        </div>
+                    </div>
                 </div>
             </section>
 
             <!-- Слайд 7: 10 шагов -->
-            <section>
-                <h2>10 шагов настройки</h2>
-                
-                <div class="steps-grid">
-                    <div class="step-card">
-                        <div class="step-number">1</div>
-                        <div class="step-text">Установка</div>
-                    </div>
-                    <div class="step-card">
-                        <div class="step-number">2</div>
-                        <div class="step-text">Персонализация</div>
-                    </div>
-                    <div class="step-card">
-                        <div class="step-number">3</div>
-                        <div class="step-text">Память</div>
-                    </div>
-                    <div class="step-card">
-                        <div class="step-number">4</div>
-                        <div class="step-text">Модель</div>
-                    </div>
-                    <div class="step-card">
-                        <div class="step-number">5</div>
-                        <div class="step-text">Telegram</div>
-                    </div>
-                    <div class="step-card">
-                        <div class="step-number">6</div>
-                        <div class="step-text">Браузер</div>
-                    </div>
-                    <div class="step-card">
-                        <div class="step-number">7</div>
-                        <div class="step-text">Skills</div>
-                    </div>
-                    <div class="step-card">
-                        <div class="step-number">8</div>
-                        <div class="step-text">Heartbeat</div>
-                    </div>
-                    <div class="step-card">
-                        <div class="step-number">9</div>
-                        <div class="step-text">Безопасность</div>
-                    </div>
-                    <div class="step-card">
-                        <div class="step-number">10</div>
-                        <div class="step-text">Мин.права</div>
+            <section data-background-image="img/setup.jpg" data-background-opacity="0.15">
+                <div class="content-container">
+                    <h2>Настройка за 10 шагов</h2>
+                    
+                    <div class="grid grid-2x5">
+                        <div class="card">
+                            <div class="number">1</div>
+                            <h3>Установка</h3>
+                            <p>npm install -g openclaw</p>
+                        </div>
+                        <div class="card">
+                            <div class="number">2</div>
+                            <h3>Персонализация</h3>
+                            <p>Имя, роль, стиль общения</p>
+                        </div>
+                        <div class="card">
+                            <div class="number">3</div>
+                            <h3>Память</h3>
+                            <p>База знаний и контекст</p>
+                        </div>
+                        <div class="card">
+                            <div class="number">4</div>
+                            <h3>Модель</h3>
+                            <p>Claude, GPT или Gemini</p>
+                        </div>
+                        <div class="card">
+                            <div class="number">5</div>
+                            <h3>Telegram</h3>
+                            <p>Подключение бота</p>
+                        </div>
+                        <div class="card">
+                            <div class="number">6</div>
+                            <h3>Браузер</h3>
+                            <p>Веб-автоматизация</p>
+                        </div>
+                        <div class="card">
+                            <div class="number">7</div>
+                            <h3>Skills</h3>
+                            <p>Специализированные навыки</p>
+                        </div>
+                        <div class="card">
+                            <div class="number">8</div>
+                            <h3>Heartbeat</h3>
+                            <p>Проактивные проверки</p>
+                        </div>
+                        <div class="card">
+                            <div class="number">9</div>
+                            <h3>Безопасность</h3>
+                            <p>Права и ограничения</p>
+                        </div>
+                        <div class="card">
+                            <div class="number">10</div>
+                            <h3>Мин. права</h3>
+                            <p>Принцип наименьших привилегий</p>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <!-- Слайд 8: Безопасность -->
-            <section>
-                <h2>Безопасность</h2>
-                
-                <ul style="font-size: 1.3rem; line-height: 2; margin: 3rem 0;">
-                    <li>Агент видит <strong style="color: var(--accent-green);">только</strong> разрешённое</li>
-                    <li>Отдельные аккаунты для агентов</li>
-                    <li>Prompt injection защита</li>
-                    <li>Минимальные права</li>
-                </ul>
+            <section data-background-image="img/security.jpg" data-background-opacity="0.15">
+                <div class="content-container">
+                    <h2>Безопасность из коробки</h2>
+                    
+                    <div class="grid grid-2x2">
+                        <div class="card">
+                            <div class="big-emoji">🔒</div>
+                            <h3>Видит только разрешённое</h3>
+                            <p>Никакого доступа к личным файлам без явного разрешения</p>
+                        </div>
+                        <div class="card">
+                            <div class="big-emoji">👤</div>
+                            <h3>Отдельные аккаунты</h3>
+                            <p>Для каждого сервиса свои учётные данные</p>
+                        </div>
+                        <div class="card">
+                            <div class="big-emoji">🛡️</div>
+                            <h3>Prompt injection защита</h3>
+                            <p>Встроенная защита от атак через промпты</p>
+                        </div>
+                        <div class="card">
+                            <div class="big-emoji">⚖️</div>
+                            <h3>Минимальные права</h3>
+                            <p>Принцип наименьших привилегий для всех операций</p>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <!-- Слайд 9: Юзкейсы -->
-            <section class="slide-usecases">
-                <h2>Юзкейсы — что реально делают люди</h2>
-                
-                <div class="bento-grid">
-                    <div class="bento-card">
-                        <div class="bento-emoji">📧</div>
-                        <div class="bento-title">Email</div>
-                        <div class="bento-desc">4000 писем/2дня</div>
-                    </div>
-                    <div class="bento-card">
-                        <div class="bento-emoji">🌅</div>
-                        <div class="bento-title">Briefing</div>
-                        <div class="bento-desc">Утренний дайджест</div>
-                    </div>
-                    <div class="bento-card">
-                        <div class="bento-emoji">📊</div>
-                        <div class="bento-title">Мониторинг</div>
-                        <div class="bento-desc">Конкуренты 24/7</div>
-                    </div>
-                    <div class="bento-card">
-                        <div class="bento-emoji">✍️</div>
-                        <div class="bento-title">Контент</div>
-                        <div class="bento-desc">10ч/нед экономии</div>
-                    </div>
-                    <div class="bento-card">
-                        <div class="bento-emoji">🏗️</div>
-                        <div class="bento-title">Лендинг за ночь</div>
-                        <div class="bento-desc">Идея→реализация</div>
-                    </div>
-                    <div class="bento-card">
-                        <div class="bento-emoji">🎯</div>
-                        <div class="bento-title">CRM</div>
-                        <div class="bento-desc">Автозапись встреч</div>
-                    </div>
-                    <div class="bento-card">
-                        <div class="bento-emoji">📚</div>
-                        <div class="bento-title">Наука</div>
-                        <div class="bento-desc">Отслеживание paper</div>
-                    </div>
-                    <div class="bento-card">
-                        <div class="bento-emoji">💼</div>
-                        <div class="bento-title">Бизнес на автопилоте</div>
-                        <div class="bento-desc">Полная автоматизация</div>
+            <section data-background-image="img/usecases.jpg" data-background-opacity="0.15">
+                <div class="content-container">
+                    <h2>Что реально делают люди</h2>
+                    
+                    <div class="grid grid-2x4">
+                        <div class="card">
+                            <div class="big-emoji">📧</div>
+                            <h3>Email</h3>
+                            <p>4000 писем за 2 дня</p>
+                        </div>
+                        <div class="card">
+                            <div class="big-emoji">🌅</div>
+                            <h3>Briefing</h3>
+                            <p>Утренний дайджест</p>
+                        </div>
+                        <div class="card">
+                            <div class="big-emoji">📊</div>
+                            <h3>Мониторинг</h3>
+                            <p>Конкуренты 24/7</p>
+                        </div>
+                        <div class="card">
+                            <div class="big-emoji">✍️</div>
+                            <h3>Контент</h3>
+                            <p>10ч/нед экономии</p>
+                        </div>
+                        <div class="card">
+                            <div class="big-emoji">🏗️</div>
+                            <h3>Лендинг</h3>
+                            <p>За одну ночь</p>
+                        </div>
+                        <div class="card">
+                            <div class="big-emoji">🎯</div>
+                            <h3>CRM</h3>
+                            <p>Автозапись встреч</p>
+                        </div>
+                        <div class="card">
+                            <div class="big-emoji">📚</div>
+                            <h3>Наука</h3>
+                            <p>Отслеживание papers</p>
+                        </div>
+                        <div class="card">
+                            <div class="big-emoji">💼</div>
+                            <h3>Бизнес</h3>
+                            <p>На автопилоте</p>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <!-- Слайд 10: No AI Slop -->
-            <section>
-                <h2>No AI Slop</h2>
-                
-                <div class="workflow-main">
-                    <div class="workflow-step">проблема</div>
-                    <div class="workflow-arrow">→</div>
-                    <div class="workflow-step">решение</div>
-                    <div class="workflow-arrow">→</div>
-                    <div class="workflow-step">результат</div>
+            <section data-background-image="img/content.jpg" data-background-opacity="0.15">
+                <div class="content-container">
+                    <h2>Контент без AI-мусора</h2>
+                    
+                    <div class="grid grid-3">
+                        <div class="card">
+                            <div class="big-emoji">❌</div>
+                            <h3>Проблема</h3>
+                            <p>ИИ-тексты выглядят как ИИ — шаблонно, безлико, скучно</p>
+                        </div>
+                        <div class="card">
+                            <div class="big-emoji">⚙️</div>
+                            <h3>Решение</h3>
+                            <p>Система промптов + стиль автора + QA проверка</p>
+                        </div>
+                        <div class="card accent">
+                            <div class="big-emoji">✅</div>
+                            <h3>Результат</h3>
+                            <p>Посты неотличимые от человеческих</p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
             <!-- Слайд 11: CRM -->
-            <section>
-                <h2>CRM</h2>
-                
-                <div class="workflow-main">
-                    <div class="workflow-step">встреча</div>
-                    <div class="workflow-arrow">→</div>
-                    <div class="workflow-step">транскрипция</div>
-                    <div class="workflow-arrow">→</div>
-                    <div class="workflow-step">CRM автоматически</div>
+            <section data-background-image="img/crm.jpg" data-background-opacity="0.15">
+                <div class="content-container">
+                    <h2>CRM из разговоров</h2>
+                    
+                    <div class="flow">
+                        <div class="card">
+                            <div class="big-emoji">🎤</div>
+                            <h3>Записал встречу</h3>
+                        </div>
+                        <div class="arrow">→</div>
+                        <div class="card">
+                            <div class="big-emoji">📝</div>
+                            <h3>Агент транскрибирует</h3>
+                        </div>
+                        <div class="arrow">→</div>
+                        <div class="card">
+                            <div class="big-emoji">📊</div>
+                            <h3>Логирует в CRM автоматически</h3>
+                        </div>
+                    </div>
+                    
+                    <div class="card" style="margin-top: 2rem;">
+                        <p class="center-text"><strong>Пример:</strong> «Пишешь в Telegram: Иванов заинтересован, перезвонить в четверг → агент заносит в базу»</p>
+                    </div>
                 </div>
             </section>
 
             <!-- Слайд 12: Mini-app -->
-            <section>
-                <h2>Mini-app</h2>
-                
-                <div class="workflow-main">
-                    <div class="workflow-step">идея вечером</div>
-                    <div class="workflow-arrow">→</div>
-                    <div class="workflow-step">лендинг утром</div>
+            <section data-background-image="img/hero.jpg" data-background-opacity="0.15">
+                <div class="content-container">
+                    <h2>Лендинг за ночь</h2>
+                    
+                    <div class="flow">
+                        <div class="card">
+                            <div class="big-emoji">💡</div>
+                            <h3>Описал идею вечером</h3>
+                        </div>
+                        <div class="arrow">→</div>
+                        <div class="card">
+                            <div class="big-emoji">🤖</div>
+                            <h3>Агент исследует, кодит, деплоит</h3>
+                        </div>
+                        <div class="arrow">→</div>
+                        <div class="card accent">
+                            <div class="big-emoji">🌅</div>
+                            <h3>Утром: рабочий сайт с доменом</h3>
+                        </div>
+                    </div>
                 </div>
             </section>
 
             <!-- Слайд 13: Ещё юзкейсы -->
-            <section>
-                <h2>Ещё</h2>
-                
-                <ul style="font-size: 1.3rem; line-height: 2; margin: 3rem 0;">
-                    <li>🏠 дом</li>
-                    <li>✈️ путешествия</li>
-                    <li>💰 финансы</li>
-                    <li>📱 соцсети</li>
-                    <li>🔍 мониторинг</li>
-                    <li>🤝 переговоры</li>
-                </ul>
-            </section>
-
-            <!-- Слайд 14: Команда -->
-            <section class="slide-team">
-                <h2>Команда</h2>
-                
-                <ul style="font-size: 1.3rem; line-height: 2; margin: 3rem 0;">
-                    <li>один=перегруз</li>
-                    <li>команда=специализация</li>
-                </ul>
-                
-                <div class="quote">
-                    Каждая задача — своему специалисту
+            <section data-background-image="img/content.jpg" data-background-opacity="0.15">
+                <div class="content-container">
+                    <h2>И это только начало</h2>
+                    
+                    <div class="grid grid-2x3">
+                        <div class="card">
+                            <div class="big-emoji">🏠</div>
+                            <h3>Умный дом</h3>
+                            <p>Управление через Telegram</p>
+                        </div>
+                        <div class="card">
+                            <div class="big-emoji">✈️</div>
+                            <h3>Путешествия</h3>
+                            <p>Маршрут + бюджет автоматически</p>
+                        </div>
+                        <div class="card">
+                            <div class="big-emoji">💰</div>
+                            <h3>Финансы</h3>
+                            <p>Чеки → автоматический учёт</p>
+                        </div>
+                        <div class="card">
+                            <div class="big-emoji">📱</div>
+                            <h3>Автопостинг</h3>
+                            <p>Во все соцсети сразу</p>
+                        </div>
+                        <div class="card">
+                            <div class="big-emoji">🔍</div>
+                            <h3>Мониторинг</h3>
+                            <p>100+ источников одновременно</p>
+                        </div>
+                        <div class="card">
+                            <div class="big-emoji">🤝</div>
+                            <h3>Торг</h3>
+                            <p>При покупке авто с Авито</p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            <!-- Слайд 15: Таблица ролей -->
-            <section>
-                <h2>Таблица ролей</h2>
-                
-                <div class="roles-grid">
-                    <div class="role-card">
-                        <div class="role-header">
-                            <div class="role-name">Координатор</div>
-                            <div class="role-model">Opus</div>
+            <!-- Слайд 14: Команда -->
+            <section data-background-image="img/team.jpg" data-background-opacity="0.15">
+                <div class="content-container">
+                    <h2>Один агент — хорошо. Команда — масштаб.</h2>
+                    
+                    <div class="grid grid-2">
+                        <div class="card">
+                            <div class="big-emoji">❌</div>
+                            <h3>Один агент = перегруз</h3>
+                            <p>Большой промпт, много обязанностей — качество страдает</p>
                         </div>
-                        <p>Декомпозирует и раздаёт задачи</p>
+                        <div class="card accent">
+                            <div class="big-emoji">✅</div>
+                            <h3>Команда = каждый делает своё</h3>
+                            <p>Чёткий план на свою задачу — достойный результат</p>
+                        </div>
                     </div>
                     
-                    <div class="role-card">
-                        <div class="role-header">
-                            <div class="role-name">Ресёрчер</div>
-                            <div class="role-model">Haiku</div>
+                    <div class="quote" style="margin-top: 2rem;">
+                        «Каждая задача — своему специалисту»
+                    </div>
+                </div>
+            </section>
+
+            <!-- Слайд 15: Роли -->
+            <section data-background-image="img/team.jpg" data-background-opacity="0.15">
+                <div class="content-container">
+                    <h2>Как выглядит команда</h2>
+                    
+                    <div class="grid grid-5" style="margin-bottom: 2rem;">
+                        <div class="card">
+                            <div class="big-emoji">🎯</div>
+                            <h3>Координатор/Opus</h3>
+                            <p>Декомпозирует задачи</p>
                         </div>
-                        <p>Ищет факты и информацию</p>
+                        <div class="card">
+                            <div class="big-emoji">🔍</div>
+                            <h3>Ресёрчер/Haiku</h3>
+                            <p>Ищет факты и данные</p>
+                        </div>
+                        <div class="card">
+                            <div class="big-emoji">✍️</div>
+                            <h3>Копирайтер/Sonnet</h3>
+                            <p>Пишет тексты</p>
+                        </div>
+                        <div class="card">
+                            <div class="big-emoji">💻</div>
+                            <h3>Программист/Opus</h3>
+                            <p>Код и PDF</p>
+                        </div>
+                        <div class="card">
+                            <div class="big-emoji">⚖️</div>
+                            <h3>QA/Sonnet</h3>
+                            <p>Проверка качества</p>
+                        </div>
                     </div>
                     
-                    <div class="role-card">
-                        <div class="role-header">
-                            <div class="role-name">Копирайтер</div>
-                            <div class="role-model">Sonnet</div>
-                        </div>
-                        <p>Создаёт тексты и посты</p>
-                    </div>
-                    
-                    <div class="role-card">
-                        <div class="role-header">
-                            <div class="role-name">Программист</div>
-                            <div class="role-model">Opus</div>
-                        </div>
-                        <p>Пишет код, создаёт PDF, документы</p>
-                    </div>
-                    
-                    <div class="role-card">
-                        <div class="role-header">
-                            <div class="role-name">QA</div>
-                            <div class="role-model">Sonnet</div>
-                        </div>
-                        <p>Проверяет и возвращает на доработку</p>
-                    </div>
+                    <p class="center-text">Отдельный Telegram-бот · Своя память · Свои скиллы</p>
                 </div>
             </section>
 
             <!-- Слайд 16: Контролирующий слой -->
-            <section class="slide-loop">
-                <h2>Контролирующий слой</h2>
-                
-                <div class="workflow-container">
-                    <div class="workflow-main">
-                        <div class="workflow-step">Задача</div>
-                        <div class="workflow-arrow">→</div>
-                        <div class="workflow-step">Координатор</div>
-                        <div class="workflow-arrow">→</div>
-                        <div class="workflow-step">Ресёрчер</div>
-                        <div class="workflow-arrow">→</div>
-                        <div class="workflow-step">Копирайтер</div>
-                        <div class="workflow-arrow">→</div>
-                        <div class="workflow-step">QA</div>
+            <section data-background-image="img/loop.jpg" data-background-opacity="0.15">
+                <div class="content-container">
+                    <h2>Контролирующий слой</h2>
+                    
+                    <div class="flow" style="margin-bottom: 2rem;">
+                        <div class="card">Задача</div>
+                        <div class="arrow">→</div>
+                        <div class="card">Координатор</div>
+                        <div class="arrow">→</div>
+                        <div class="card">Ресёрчер</div>
+                        <div class="arrow">→</div>
+                        <div class="card">Копирайтер</div>
+                        <div class="arrow">→</div>
+                        <div class="card">QA</div>
                     </div>
                     
-                    <div class="workflow-branches">
-                        <div class="workflow-branch">
-                            <div class="workflow-ok">ОК</div>
-                            <div class="workflow-arrow">→</div>
-                            <div class="workflow-step">Результат</div>
+                    <div class="grid grid-2">
+                        <div class="flow">
+                            <div class="big-emoji">✅</div>
+                            <p>ОК</p>
+                            <div class="arrow">→</div>
+                            <div class="card accent">Результат</div>
                         </div>
-                        
-                        <div class="workflow-branch">
-                            <div class="workflow-error">Ошибка</div>
-                            <div class="workflow-arrow">→</div>
-                            <div>доработка</div>
+                        <div class="flow">
+                            <div class="big-emoji">❌</div>
+                            <p>Ошибка</p>
+                            <div class="arrow">→</div>
+                            <div class="card">Доработка</div>
+                            <div class="arrow">→</div>
+                            <div class="card">Повторная проверка</div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="quote">
-                    Code review для любой задачи
+                    
+                    <div class="quote">
+                        «Code review для любой задачи»
+                    </div>
                 </div>
             </section>
 
             <!-- Слайд 17: Свободный агент -->
-            <section>
-                <h2>Свободный агент</h2>
-                
-                <ul style="font-size: 1.3rem; line-height: 2; margin: 3rem 0;">
-                    <li>один всегда свободен</li>
-                    <li>горячая линия</li>
-                </ul>
-            </section>
-
-            <!-- Слайд 18: Демо 4 минуты -->
-            <section>
-                <h2>Демо</h2>
-                
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-time">25 сек</div>
-                        <div class="timeline-action">Ресёрч</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-time">1 мин</div>
-                        <div class="timeline-action">Копирайт</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-time">30 сек</div>
-                        <div class="timeline-action">QA: 3 замечания→возврат→ОК</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-time">2 мин</div>
-                        <div class="timeline-action">PDF</div>
+            <section data-background-image="img/freeagent.jpg" data-background-opacity="0.15">
+                <div class="content-container">
+                    <h2>Контроль без блокировки</h2>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 2rem; align-items: center;">
+                        <p class="large-text center-text">Пока команда работает — один агент всегда свободен</p>
+                        <p class="large-text center-text">Срочный вопрос, проверка статуса, новая задача</p>
+                        <p class="large-text center-text highlight">Координатор занят → но у тебя есть горячая линия</p>
                     </div>
                 </div>
-                
-                <div class="glass-card" style="text-align: center;">
-                    <strong style="color: var(--accent-green); font-size: 1.4rem;">
-                        Итого 4мин 5агентов 0 ручного труда
-                    </strong>
+            </section>
+
+            <!-- Слайд 18: Демо -->
+            <section data-background-image="img/demo.jpg" data-background-opacity="0.15">
+                <div class="content-container">
+                    <h2>Конвейер за 4 минуты</h2>
+                    
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-time">25сек</div>
+                            <p>Ресёрчер нашёл 5 новостей</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-time">1мин</div>
+                            <p>Копирайтер написал пост</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-time">30сек</div>
+                            <p>QA: 3 замечания → возврат → ОК</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-time">2мин</div>
+                            <p>Программист оформил PDF</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card accent" style="margin-top: 2rem;">
+                        <p class="center-text large-text">4 минуты · 5 агентов · 0 ручного труда</p>
+                    </div>
                 </div>
             </section>
 
             <!-- Слайд 19: Тренды -->
-            <section>
-                <h2>Тренды</h2>
-                
-                <ul style="font-size: 1.3rem; line-height: 2; margin: 3rem 0;">
-                    <li>ClawhHub.ai</li>
-                    <li>мультимодальность</li>
-                    <li>десятки агентов</li>
-                    <li>MCP-протокол</li>
-                </ul>
+            <section data-background-image="img/trends.jpg" data-background-opacity="0.15">
+                <div class="content-container">
+                    <h2>Что дальше</h2>
+                    
+                    <div class="grid grid-2x2">
+                        <div class="card">
+                            <div class="big-emoji">🧩</div>
+                            <h3>ClawhHub.ai</h3>
+                            <p>Маркетплейс скиллов растёт</p>
+                        </div>
+                        <div class="card">
+                            <div class="big-emoji">👁️</div>
+                            <h3>Мультимодальность</h3>
+                            <p>Камера, голос, экран</p>
+                        </div>
+                        <div class="card">
+                            <div class="big-emoji">🤖</div>
+                            <h3>Команды агентов</h3>
+                            <p>Из десятков специалистов</p>
+                        </div>
+                        <div class="card">
+                            <div class="big-emoji">🔌</div>
+                            <h3>MCP-протокол</h3>
+                            <p>Стандарт подключения к любому сервису</p>
+                        </div>
+                    </div>
+                </div>
             </section>
 
-            <!-- Слайд 20: CTA -->
-            <section>
-                <div class="cta-container">
-                    <div class="cta-title">Присоединяйтесь к AI First</div>
+            <!-- Слайд 20: Ресурсы -->
+            <section data-background-image="img/setup.jpg" data-background-opacity="0.15">
+                <div class="content-container">
+                    <h2>Полезные ресурсы</h2>
                     
-                    <div class="cta-links">
-                        <a href="https://openclaw.ai" class="cta-card">
-                            <div class="cta-card-title">🚀 openclaw.ai</div>
-                            <div class="cta-card-desc">Установка и начало работы</div>
-                        </a>
-                        
-                        <a href="https://docs.openclaw.ai" class="cta-card">
-                            <div class="cta-card-title">📚 docs.openclaw.ai</div>
-                            <div class="cta-card-desc">Документация и гайды</div>
-                        </a>
-                        
-                        <a href="https://clawhub.ai" class="cta-card">
-                            <div class="cta-card-title">🧩 clawhub.ai</div>
-                            <div class="cta-card-desc">Маркетплейс Skills</div>
-                        </a>
+                    <div class="grid grid-3" style="margin-bottom: 2rem;">
+                        <div class="card">
+                            <div class="big-emoji">🚀</div>
+                            <h3>openclaw.ai</h3>
+                            <p>Быстрая установка и настройка</p>
+                        </div>
+                        <div class="card">
+                            <div class="big-emoji">📚</div>
+                            <h3>docs.openclaw.ai</h3>
+                            <p>Документация и пошаговые гайды</p>
+                        </div>
+                        <div class="card">
+                            <div class="big-emoji">🧩</div>
+                            <h3>clawhub.ai</h3>
+                            <p>Маркетплейс готовых Skills</p>
+                        </div>
                     </div>
                     
-                    <div class="glass-card" style="text-align: center; margin-top: 2rem;">
-                        <p style="font-size: 1.3rem; color: var(--accent-green); font-weight: 600; margin-bottom: 0.5rem;">Сообщество AI First</p>
-                        <p style="font-size: 1.1rem;">Записывайтесь на следующие встречи · Обсуждаем кейсы · Помогаем с настройкой</p>
-                        <p style="font-size: 1.2rem; margin-top: 1rem;"><strong style="color: var(--text-primary);">Алексей Южанинов</strong></p>
+                    <div class="card">
+                        <p class="center-text">OpenClaw — open-source AI-агент, который работает в Telegram, помнит контекст и автоматизирует задачи. Бесплатный.</p>
                     </div>
+                </div>
+            </section>
+
+            <!-- Слайд 21: Сообщество -->
+            <section data-background-image="img/community.jpg" data-background-opacity="0.15">
+                <div class="content-container">
+                    <h2>Присоединяйтесь к AI First</h2>
+                    
+                    <div class="card accent" style="margin-bottom: 2rem; padding: 3rem;">
+                        <p class="large-text center-text">
+                            Регулярные встречи · Разбор кейсов · Помощь с настройкой ·<br>
+                            Обмен опытом · Поддержка сообщества
+                        </p>
+                    </div>
+                    
+                    <p class="subtitle">Алексей Южанинов · AI First</p>
+                    <p class="large-text center-text highlight">Записывайтесь на следующую встречу!</p>
                 </div>
             </section>
 
         </div>
     </div>
 
-    <!-- Reveal.js JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.js"></script>
     <script>
-        // Initialize Reveal.js
         Reveal.initialize({
             hash: true,
             controls: true,
             progress: true,
-            center: false,
+            center: true,
             transition: 'slide',
-            transitionSpeed: 'default',
-            
-            // Display slide numbers
             slideNumber: 'c/t',
-            showSlideNumber: 'all',
-            
-            // Enable keyboard shortcuts
-            keyboard: true,
-            
-            // Enable touch navigation
-            touch: true,
-            
-            // Don't loop
-            loop: false,
-            
-            // Fragments disabled — all content appears with slide
             fragments: false,
-            
-            // Auto slide disabled
-            autoSlide: 0,
-            
-            // Mouse wheel navigation
             mouseWheel: false,
-            
-            // Hide address bar on mobile
-            hideAddressBar: true,
-            
-            // Don't preview links
-            previewLinks: false,
-            
-            // Controls settings
-            controlsBackArrows: 'faded',
-            
-            // History disabled
-            history: false,
-            
-            // Overview mode
-            overview: true,
-            
-            // Vertical centering disabled
-            center: false,
-            
-            // PDF settings
-            pdfMaxPagesPerSlide: 1,
-            
-            // View distance
-            viewDistance: 3,
-            
-            // Dependencies
-            dependencies: []
-        });
-        
-        // Custom key bindings
-        Reveal.addKeyBinding({ keyCode: 13, key: 'Enter', description: 'Go to next slide' }, 'next');
-        Reveal.addKeyBinding({ keyCode: 8, key: 'Backspace', description: 'Go to previous slide' }, 'prev');
-        
-        // Initialize fragments with proper timing
-        Reveal.addEventListener('slidechanged', function(event) {
-            // Reset fragment indices on slide change
-            var fragments = event.currentSlide.querySelectorAll('.fragment');
-            fragments.forEach(function(fragment, index) {
-                fragment.style.animationDelay = (index * 0.1) + 's';
-            });
-        });
-        
-        // Smooth scrolling for overflow content
-        document.addEventListener('DOMContentLoaded', function() {
-            document.body.style.scrollBehavior = 'smooth';
+            touch: true,
+            keyboard: true
         });
     </script>
 </body>
