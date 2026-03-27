@@ -15,7 +15,8 @@
 .reveal h1{font-size:clamp(2.2rem,5vw,3.8rem)}
 .reveal h2{font-size:clamp(1.6rem,3.5vw,2.6rem)}
 .reveal p,.reveal li{color:var(--t2);font-size:clamp(1rem,1.8vw,1.3rem);line-height:1.6;text-align:center}
-.reveal .slides section{text-align:center;padding:1.5rem 2rem}
+.reveal .slides section{text-align:center;padding:2rem 3rem}
+.reveal .slides section>*{margin-left:auto;margin-right:auto}
 
 /* cards */
 .gc{background:var(--card);border:1px solid var(--cborder);border-radius:16px;backdrop-filter:blur(12px);padding:1.2rem 1.5rem;text-align:center}
@@ -142,31 +143,74 @@
 </div>
 </section>
 
-<!-- 7. 10 ШАГОВ -->
+<!-- 7a. НАСТРОЙКА: Фундамент -->
 <section data-background-image="img/setup.jpg" data-background-opacity="0.1">
-<h2>10 шагов настройки</h2>
-<div class="g2">
-<div class="gc"><span class="sn" style="font-size:1.5rem">1</span><p>Установка</p></div>
-<div class="gc"><span class="sn" style="font-size:1.5rem">2</span><p>Персонализация</p></div>
-<div class="gc"><span class="sn" style="font-size:1.5rem">3</span><p>Память</p></div>
-<div class="gc"><span class="sn" style="font-size:1.5rem">4</span><p>Модель</p></div>
-<div class="gc"><span class="sn" style="font-size:1.5rem">5</span><p>Telegram</p></div>
-<div class="gc"><span class="sn" style="font-size:1.5rem">6</span><p>Браузер</p></div>
-<div class="gc"><span class="sn" style="font-size:1.5rem">7</span><p>Skills</p></div>
-<div class="gc"><span class="sn" style="font-size:1.5rem">8</span><p>Heartbeat</p></div>
-<div class="gc"><span class="sn" style="font-size:1.5rem">9</span><p>Безопасность</p></div>
-<div class="gc"><span class="sn" style="font-size:1.5rem">10</span><p>Мин. права</p></div>
+<h2>Настройка: фундамент</h2>
+<div class="g2" style="max-width:800px;margin:1.5rem auto">
+<div class="gc">
+<span class="sn" style="font-size:2rem">1</span>
+<h3>Установка</h3>
+<p>Ставишь на сервер (VPS) или свой ноутбук. Одна команда в терминале.</p>
+</div>
+<div class="gc">
+<span class="sn" style="font-size:2rem">2</span>
+<h3>Персонализация</h3>
+<p>Описываешь кто ты, чем занимаешься, как с тобой общаться. Агент подстраивается.</p>
+</div>
+<div class="gc">
+<span class="sn" style="font-size:2rem">3</span>
+<h3>Память</h3>
+<p>Настраиваешь что помнить. Память сохраняется между сессиями и улучшается со временем.</p>
+</div>
+<div class="gc">
+<span class="sn" style="font-size:2rem">4</span>
+<h3>Выбор модели</h3>
+<p>Claude, GPT, Gemini — подключаешь любую. Можно разные модели под разные задачи.</p>
+</div>
 </div>
 </section>
 
-<!-- 8. БЕЗОПАСНОСТЬ -->
+<!-- 7b. НАСТРОЙКА: Подключение -->
+<section data-background-image="img/setup.jpg" data-background-opacity="0.08">
+<h2>Настройка: подключение</h2>
+<div class="g3" style="max-width:900px;margin:1.5rem auto">
+<div class="gc">
+<span class="sn" style="font-size:2rem">5</span>
+<h3>Telegram</h3>
+<p>Подключаешь мессенджер — общаешься с агентом как с человеком. С телефона, с компьютера.</p>
+</div>
+<div class="gc">
+<span class="sn" style="font-size:2rem">6</span>
+<h3>Браузер</h3>
+<p>Три режима: агент может заходить на сайты, заполнять формы, парсить данные.</p>
+</div>
+<div class="gc">
+<span class="sn" style="font-size:2rem">7</span>
+<h3>Skills</h3>
+<p>Маркетплейс готовых навыков. Подключаешь как приложения — ресёрч, копирайтинг, аналитика.</p>
+</div>
+</div>
+</section>
+
+<!-- 7c. НАСТРОЙКА: Автономность и безопасность -->
 <section data-background-image="img/security.jpg" data-background-opacity="0.12">
-<h2>Безопасность</h2>
-<div class="g2">
-<div class="gc"><span class="em">🔒</span><p>Агент видит <strong style="color:var(--green)">только</strong> разрешённое</p></div>
-<div class="gc"><span class="em">👤</span><p>Отдельные аккаунты для агентов</p></div>
-<div class="gc"><span class="em">🛡️</span><p>Prompt injection защита</p></div>
-<div class="gc"><span class="em">⚖️</span><p>Принцип минимальных прав</p></div>
+<h2>Настройка: автономность и защита</h2>
+<div class="g3" style="max-width:900px;margin:1.5rem auto">
+<div class="gc bright">
+<span class="sn" style="font-size:2rem">8</span>
+<h3>Heartbeat</h3>
+<p>Каждые 30 минут агент просыпается и проверяет задачи. Как живой сотрудник.</p>
+</div>
+<div class="gc">
+<span class="sn" style="font-size:2rem">9</span>
+<h3>Безопасность</h3>
+<p>Prompt injection защита. Агент видит только то, что ты разрешил. Отдельные аккаунты.</p>
+</div>
+<div class="gc">
+<span class="sn" style="font-size:2rem">10</span>
+<h3>Мин. права</h3>
+<p>Принцип наименьших привилегий. Каждому агенту — ровно столько доступа, сколько нужно.</p>
+</div>
 </div>
 </section>
 
@@ -248,9 +292,9 @@
 </section>
 
 <!-- 15. РОЛИ — оргструктура -->
-<section data-background-image="img/orgchart.jpg" data-background-opacity="0.7" data-background-size="contain">
+<section data-background-image="img/orgstructure.jpg" data-background-opacity="0.65" data-background-size="contain">
 <h2>Как выглядит команда</h2>
-<p style="margin-top:2rem;color:var(--t2);font-size:1.3rem">Каждый агент — отдельный Telegram-бот<br>Своя память · Своя модель · Свои скиллы</p>
+<p style="margin-top:12rem;color:var(--t2);font-size:1.3rem">Каждый агент — отдельный Telegram-бот · Своя память · Своя модель · Свои скиллы</p>
 </section>
 
 <!-- 16. КОНТРОЛИРУЮЩИЙ СЛОЙ -->
