@@ -45,7 +45,13 @@
         }
         
         .reveal .slides section {
-            padding: 3rem 2rem;
+            padding: 2rem 2rem;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+        
+        .reveal .slides section > * {
+            max-width: 100%;
         }
         
         /* Typography */
@@ -61,18 +67,18 @@
         }
         
         .reveal h1 {
-            font-size: 4.5rem;
-            margin-bottom: 2rem;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1.5rem;
         }
         
         .reveal h2 {
-            font-size: 3rem;
-            margin-bottom: 2rem;
+            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+            margin-bottom: 1.5rem;
         }
         
         .reveal h3 {
-            font-size: 2.2rem;
-            margin-bottom: 1.5rem;
+            font-size: clamp(1.2rem, 2vw, 1.8rem);
+            margin-bottom: 1rem;
         }
         
         .reveal .subtitle {
@@ -186,7 +192,7 @@
         }
         
         .title-slide h1 {
-            font-size: 5rem;
+            font-size: clamp(2.5rem, 5vw, 4rem);
             margin-bottom: 1rem;
             text-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
@@ -346,26 +352,26 @@
         .steps-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin: 3rem 0;
+            gap: 0.8rem;
+            margin: 1rem 0;
         }
         
         .step-card {
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
-            border-radius: 20px;
+            border-radius: 14px;
             backdrop-filter: blur(16px);
-            padding: 1.5rem;
+            padding: 0.8rem 1.2rem;
             box-shadow: var(--glass-shadow);
             display: flex;
             align-items: center;
-            gap: 1.5rem;
+            gap: 1rem;
         }
         
         .step-number {
             font-family: 'Space Grotesk', sans-serif;
             font-weight: 700;
-            font-size: 2.5rem;
+            font-size: 1.8rem;
             background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -383,9 +389,9 @@
         .bento-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: repeat(2, 1fr);
-            gap: 1rem;
-            margin: 3rem 0;
+            grid-template-rows: repeat(2, auto);
+            gap: 0.8rem;
+            margin: 1.5rem 0;
             position: relative;
             z-index: 1;
         }
@@ -393,9 +399,9 @@
         .bento-card {
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
-            border-radius: 16px;
+            border-radius: 14px;
             backdrop-filter: blur(16px);
-            padding: 1.5rem;
+            padding: 1rem;
             box-shadow: var(--glass-shadow);
             font-size: 0.95rem;
             display: flex;
@@ -645,15 +651,20 @@
             border: 1px solid rgba(255,255,255,0.1);
         }
         
-        /* Fragment animations */
-        .reveal .slides section .fragment.fade-up {
-            transform: translate3d(0, 40px, 0);
-            opacity: 0;
+        /* Slide content entrance animation */
+        .reveal .slides section.present > * {
+            animation: slideContentIn 0.6s ease-out both;
         }
         
-        .reveal .slides section .fragment.fade-up.visible {
-            transform: translate3d(0, 0, 0);
-            opacity: 1;
+        .reveal .slides section.present > *:nth-child(1) { animation-delay: 0s; }
+        .reveal .slides section.present > *:nth-child(2) { animation-delay: 0.1s; }
+        .reveal .slides section.present > *:nth-child(3) { animation-delay: 0.2s; }
+        .reveal .slides section.present > *:nth-child(4) { animation-delay: 0.3s; }
+        .reveal .slides section.present > *:nth-child(5) { animation-delay: 0.4s; }
+        
+        @keyframes slideContentIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         /* Responsive */
@@ -717,30 +728,30 @@
             
             <!-- Слайд 1: Титульный -->
             <section class="title-slide slide-hero">
-                <h1 class="fragment fade-up" data-fragment-index="0">OpenClaw: ваш первый цифровой сотрудник</h1>
-                <div class="subtitle fragment fade-up" data-fragment-index="1">
+                <h1>OpenClaw: ваш первый цифровой сотрудник</h1>
+                <div class="subtitle">
                     AI First · Алексей Южанинов · Март 2026
                 </div>
             </section>
 
             <!-- Слайд 2: Контекст -->
             <section>
-                <h2 class="fragment fade-up" data-fragment-index="0">Контекст — что происходит прямо сейчас</h2>
+                <h2>Контекст — что происходит прямо сейчас</h2>
                 
-                <div class="quote fragment fade-up" data-fragment-index="1">
+                <div class="quote">
                     Jensen Huang: «Каждой компании нужна OpenClaw-стратегия. Это новый компьютер.»
                 </div>
                 
                 <div class="stats-grid">
-                    <div class="stat-card fragment fade-up" data-fragment-index="2">
+                    <div class="stat-card">
                         <span class="stat-number">68K+</span>
                         <div>GitHub stars</div>
                     </div>
-                    <div class="stat-card fragment fade-up" data-fragment-index="3">
+                    <div class="stat-card">
                         <span class="stat-number">Forbes</span>
                         <div>DigitalOcean, KDnuggets</div>
                     </div>
-                    <div class="stat-card fragment fade-up" data-fragment-index="4">
+                    <div class="stat-card">
                         <span class="stat-number">#1</span>
                         <div>Самый горячий AI-инструмент 2026</div>
                     </div>
@@ -749,10 +760,10 @@
 
             <!-- Слайд 3: Три поколения AI -->
             <section class="slide-evolution">
-                <h2 class="fragment fade-up" data-fragment-index="0">Три поколения AI</h2>
+                <h2>Три поколения AI</h2>
                 
                 <div class="generation-grid">
-                    <div class="gen-card chatgpt fragment fade-up" data-fragment-index="1">
+                    <div class="gen-card chatgpt">
                         <div class="gen-title">ChatGPT (2023)</div>
                         <ul>
                             <li>☁️ Облако</li>
@@ -763,7 +774,7 @@
                         </ul>
                     </div>
                     
-                    <div class="gen-card claude-code fragment fade-up" data-fragment-index="2">
+                    <div class="gen-card claude-code">
                         <div class="gen-title">Claude Code (2025)</div>
                         <ul>
                             <li>💻 Локально</li>
@@ -774,7 +785,7 @@
                         </ul>
                     </div>
                     
-                    <div class="gen-card openclaw halo-green fragment fade-up" data-fragment-index="3">
+                    <div class="gen-card openclaw halo-green">
                         <div class="gen-title">OpenClaw (2026)</div>
                         <ul>
                             <li>🌐 Везде</li>
@@ -786,7 +797,7 @@
                     </div>
                 </div>
                 
-                <div class="glass-card fragment fade-up" data-fragment-index="4" style="text-align: center; margin-top: 2rem;">
+                <div class="glass-card" style="text-align: center; margin-top: 2rem;">
                     <strong style="color: var(--accent-green); font-size: 1.5rem;">
                         ChatGPT — чат. Claude Code — кодер. OpenClaw — сотрудник.
                     </strong>
@@ -795,29 +806,29 @@
 
             <!-- Слайд 4: Простая метафора -->
             <section>
-                <h2 class="fragment fade-up" data-fragment-index="0">Простая метафора</h2>
+                <h2>Простая метафора</h2>
                 
                 <div class="metaphor-grid">
-                    <div class="metaphor-card fragment fade-up" data-fragment-index="1">
+                    <div class="metaphor-card">
                         <span class="metaphor-emoji">💬</span>
                         <div class="metaphor-title">ChatGPT</div>
                         <p>переписываться с консультантом</p>
                     </div>
                     
-                    <div class="metaphor-card fragment fade-up" data-fragment-index="2">
+                    <div class="metaphor-card">
                         <span class="metaphor-emoji">📎</span>
                         <div class="metaphor-title">Claude Code</div>
                         <p>программист за ноутбуком</p>
                     </div>
                     
-                    <div class="metaphor-card halo-green fragment fade-up" data-fragment-index="3">
+                    <div class="metaphor-card halo-green">
                         <span class="metaphor-emoji">🚀</span>
                         <div class="metaphor-title">OpenClaw</div>
                         <p>сотрудник с телефоном и доступами</p>
                     </div>
                 </div>
                 
-                <div class="glass-card fragment fade-up" data-fragment-index="4" style="text-align: center; margin-top: 2rem;">
+                <div class="glass-card" style="text-align: center; margin-top: 2rem;">
                     <p style="font-size: 1.4rem; font-weight: 600;">
                         Он не просто отвечает — он <span style="color: var(--accent-green);">ДЕЛАЕТ</span>
                     </p>
@@ -826,72 +837,72 @@
 
             <!-- Слайд 5: Почему это важно -->
             <section>
-                <h2 class="fragment fade-up" data-fragment-index="0">Почему это важно для предпринимателей</h2>
+                <h2>Почему это важно для предпринимателей</h2>
                 
                 <ul style="font-size: 1.4rem; line-height: 2; margin: 3rem 0;">
-                    <li class="fragment fade-up" data-fragment-index="1">Разрыв «хочу попробовать ИИ» → «ИИ работает на меня» огромный</li>
-                    <li class="fragment fade-up" data-fragment-index="2"><strong>ChatGPT</strong> = советчик. <strong style="color: var(--accent-green);">OpenClaw</strong> = исполнитель.</li>
-                    <li class="fragment fade-up" data-fragment-index="3">Задача в Telegram → агент выполняет</li>
+                    <li>Разрыв «хочу попробовать ИИ» → «ИИ работает на меня» огромный</li>
+                    <li><strong>ChatGPT</strong> = советчик. <strong style="color: var(--accent-green);">OpenClaw</strong> = исполнитель.</li>
+                    <li>Задача в Telegram → агент выполняет</li>
                 </ul>
             </section>
 
             <!-- Слайд 6: Архитектура -->
             <section class="slide-arch">
-                <h2 class="fragment fade-up" data-fragment-index="0">Как устроено — архитектура</h2>
+                <h2>Как устроено — архитектура</h2>
                 
                 <div class="arch-flow">
-                    <div class="arch-level fragment fade-up" data-fragment-index="1">Telegram / Slack / WhatsApp</div>
-                    <div class="arch-arrow fragment fade-up" data-fragment-index="2">↕</div>
-                    <div class="arch-level fragment fade-up" data-fragment-index="3">OpenClaw Gateway</div>
-                    <div class="arch-arrow fragment fade-up" data-fragment-index="4">↕</div>
-                    <div class="arch-level fragment fade-up" data-fragment-index="5">AI мозг (Claude/GPT/Gemini)</div>
-                    <div class="arch-arrow fragment fade-up" data-fragment-index="6">↕</div>
-                    <div class="arch-level fragment fade-up" data-fragment-index="7">Инструменты (браузер, email, файлы, API, cron)</div>
+                    <div class="arch-level">Telegram / Slack / WhatsApp</div>
+                    <div class="arch-arrow">↕</div>
+                    <div class="arch-level">OpenClaw Gateway</div>
+                    <div class="arch-arrow">↕</div>
+                    <div class="arch-level">AI мозг (Claude/GPT/Gemini)</div>
+                    <div class="arch-arrow">↕</div>
+                    <div class="arch-level">Инструменты (браузер, email, файлы, API, cron)</div>
                 </div>
             </section>
 
             <!-- Слайд 7: 10 шагов -->
             <section>
-                <h2 class="fragment fade-up" data-fragment-index="0">10 шагов настройки</h2>
+                <h2>10 шагов настройки</h2>
                 
                 <div class="steps-grid">
-                    <div class="step-card fragment fade-up" data-fragment-index="1">
+                    <div class="step-card">
                         <div class="step-number">1</div>
                         <div class="step-text">Установка</div>
                     </div>
-                    <div class="step-card fragment fade-up" data-fragment-index="1">
+                    <div class="step-card">
                         <div class="step-number">2</div>
                         <div class="step-text">Персонализация</div>
                     </div>
-                    <div class="step-card fragment fade-up" data-fragment-index="2">
+                    <div class="step-card">
                         <div class="step-number">3</div>
                         <div class="step-text">Память</div>
                     </div>
-                    <div class="step-card fragment fade-up" data-fragment-index="2">
+                    <div class="step-card">
                         <div class="step-number">4</div>
                         <div class="step-text">Модель</div>
                     </div>
-                    <div class="step-card fragment fade-up" data-fragment-index="3">
+                    <div class="step-card">
                         <div class="step-number">5</div>
                         <div class="step-text">Telegram</div>
                     </div>
-                    <div class="step-card fragment fade-up" data-fragment-index="3">
+                    <div class="step-card">
                         <div class="step-number">6</div>
                         <div class="step-text">Браузер</div>
                     </div>
-                    <div class="step-card fragment fade-up" data-fragment-index="4">
+                    <div class="step-card">
                         <div class="step-number">7</div>
                         <div class="step-text">Skills</div>
                     </div>
-                    <div class="step-card fragment fade-up" data-fragment-index="4">
+                    <div class="step-card">
                         <div class="step-number">8</div>
                         <div class="step-text">Heartbeat</div>
                     </div>
-                    <div class="step-card fragment fade-up" data-fragment-index="5">
+                    <div class="step-card">
                         <div class="step-number">9</div>
                         <div class="step-text">Безопасность</div>
                     </div>
-                    <div class="step-card fragment fade-up" data-fragment-index="5">
+                    <div class="step-card">
                         <div class="step-number">10</div>
                         <div class="step-text">Мин.права</div>
                     </div>
@@ -900,57 +911,57 @@
 
             <!-- Слайд 8: Безопасность -->
             <section>
-                <h2 class="fragment fade-up" data-fragment-index="0">Безопасность</h2>
+                <h2>Безопасность</h2>
                 
                 <ul style="font-size: 1.3rem; line-height: 2; margin: 3rem 0;">
-                    <li class="fragment fade-up" data-fragment-index="1">Агент видит <strong style="color: var(--accent-green);">только</strong> разрешённое</li>
-                    <li class="fragment fade-up" data-fragment-index="2">Отдельные аккаунты для агентов</li>
-                    <li class="fragment fade-up" data-fragment-index="3">Prompt injection защита</li>
-                    <li class="fragment fade-up" data-fragment-index="4">Минимальные права</li>
+                    <li>Агент видит <strong style="color: var(--accent-green);">только</strong> разрешённое</li>
+                    <li>Отдельные аккаунты для агентов</li>
+                    <li>Prompt injection защита</li>
+                    <li>Минимальные права</li>
                 </ul>
             </section>
 
             <!-- Слайд 9: Юзкейсы -->
             <section class="slide-usecases">
-                <h2 class="fragment fade-up" data-fragment-index="0">Юзкейсы — что реально делают люди</h2>
+                <h2>Юзкейсы — что реально делают люди</h2>
                 
                 <div class="bento-grid">
-                    <div class="bento-card fragment fade-up" data-fragment-index="1">
+                    <div class="bento-card">
                         <div class="bento-emoji">📧</div>
                         <div class="bento-title">Email</div>
                         <div class="bento-desc">4000 писем/2дня</div>
                     </div>
-                    <div class="bento-card fragment fade-up" data-fragment-index="1">
+                    <div class="bento-card">
                         <div class="bento-emoji">🌅</div>
                         <div class="bento-title">Briefing</div>
                         <div class="bento-desc">Утренний дайджест</div>
                     </div>
-                    <div class="bento-card fragment fade-up" data-fragment-index="2">
+                    <div class="bento-card">
                         <div class="bento-emoji">📊</div>
                         <div class="bento-title">Мониторинг</div>
                         <div class="bento-desc">Конкуренты 24/7</div>
                     </div>
-                    <div class="bento-card fragment fade-up" data-fragment-index="2">
+                    <div class="bento-card">
                         <div class="bento-emoji">✍️</div>
                         <div class="bento-title">Контент</div>
                         <div class="bento-desc">10ч/нед экономии</div>
                     </div>
-                    <div class="bento-card fragment fade-up" data-fragment-index="3">
+                    <div class="bento-card">
                         <div class="bento-emoji">🏗️</div>
                         <div class="bento-title">Лендинг за ночь</div>
                         <div class="bento-desc">Идея→реализация</div>
                     </div>
-                    <div class="bento-card fragment fade-up" data-fragment-index="3">
+                    <div class="bento-card">
                         <div class="bento-emoji">🎯</div>
                         <div class="bento-title">CRM</div>
                         <div class="bento-desc">Автозапись встреч</div>
                     </div>
-                    <div class="bento-card fragment fade-up" data-fragment-index="4">
+                    <div class="bento-card">
                         <div class="bento-emoji">📚</div>
                         <div class="bento-title">Наука</div>
                         <div class="bento-desc">Отслеживание paper</div>
                     </div>
-                    <div class="bento-card fragment fade-up" data-fragment-index="4">
+                    <div class="bento-card">
                         <div class="bento-emoji">💼</div>
                         <div class="bento-title">Бизнес на автопилоте</div>
                         <div class="bento-desc">Полная автоматизация</div>
@@ -960,75 +971,75 @@
 
             <!-- Слайд 10: No AI Slop -->
             <section>
-                <h2 class="fragment fade-up" data-fragment-index="0">No AI Slop</h2>
+                <h2>No AI Slop</h2>
                 
                 <div class="workflow-main">
-                    <div class="workflow-step fragment fade-up" data-fragment-index="1">проблема</div>
-                    <div class="workflow-arrow fragment fade-up" data-fragment-index="2">→</div>
-                    <div class="workflow-step fragment fade-up" data-fragment-index="3">решение</div>
-                    <div class="workflow-arrow fragment fade-up" data-fragment-index="4">→</div>
-                    <div class="workflow-step fragment fade-up" data-fragment-index="5">результат</div>
+                    <div class="workflow-step">проблема</div>
+                    <div class="workflow-arrow">→</div>
+                    <div class="workflow-step">решение</div>
+                    <div class="workflow-arrow">→</div>
+                    <div class="workflow-step">результат</div>
                 </div>
             </section>
 
             <!-- Слайд 11: CRM -->
             <section>
-                <h2 class="fragment fade-up" data-fragment-index="0">CRM</h2>
+                <h2>CRM</h2>
                 
                 <div class="workflow-main">
-                    <div class="workflow-step fragment fade-up" data-fragment-index="1">встреча</div>
-                    <div class="workflow-arrow fragment fade-up" data-fragment-index="2">→</div>
-                    <div class="workflow-step fragment fade-up" data-fragment-index="3">транскрипция</div>
-                    <div class="workflow-arrow fragment fade-up" data-fragment-index="4">→</div>
-                    <div class="workflow-step fragment fade-up" data-fragment-index="5">CRM автоматически</div>
+                    <div class="workflow-step">встреча</div>
+                    <div class="workflow-arrow">→</div>
+                    <div class="workflow-step">транскрипция</div>
+                    <div class="workflow-arrow">→</div>
+                    <div class="workflow-step">CRM автоматически</div>
                 </div>
             </section>
 
             <!-- Слайд 12: Mini-app -->
             <section>
-                <h2 class="fragment fade-up" data-fragment-index="0">Mini-app</h2>
+                <h2>Mini-app</h2>
                 
                 <div class="workflow-main">
-                    <div class="workflow-step fragment fade-up" data-fragment-index="1">идея вечером</div>
-                    <div class="workflow-arrow fragment fade-up" data-fragment-index="2">→</div>
-                    <div class="workflow-step fragment fade-up" data-fragment-index="3">лендинг утром</div>
+                    <div class="workflow-step">идея вечером</div>
+                    <div class="workflow-arrow">→</div>
+                    <div class="workflow-step">лендинг утром</div>
                 </div>
             </section>
 
             <!-- Слайд 13: Ещё юзкейсы -->
             <section>
-                <h2 class="fragment fade-up" data-fragment-index="0">Ещё</h2>
+                <h2>Ещё</h2>
                 
                 <ul style="font-size: 1.3rem; line-height: 2; margin: 3rem 0;">
-                    <li class="fragment fade-up" data-fragment-index="1">🏠 дом</li>
-                    <li class="fragment fade-up" data-fragment-index="2">✈️ путешествия</li>
-                    <li class="fragment fade-up" data-fragment-index="3">💰 финансы</li>
-                    <li class="fragment fade-up" data-fragment-index="4">📱 соцсети</li>
-                    <li class="fragment fade-up" data-fragment-index="5">🔍 мониторинг</li>
-                    <li class="fragment fade-up" data-fragment-index="6">🤝 переговоры</li>
+                    <li>🏠 дом</li>
+                    <li>✈️ путешествия</li>
+                    <li>💰 финансы</li>
+                    <li>📱 соцсети</li>
+                    <li>🔍 мониторинг</li>
+                    <li>🤝 переговоры</li>
                 </ul>
             </section>
 
             <!-- Слайд 14: Команда -->
             <section class="slide-team">
-                <h2 class="fragment fade-up" data-fragment-index="0">Команда</h2>
+                <h2>Команда</h2>
                 
                 <ul style="font-size: 1.3rem; line-height: 2; margin: 3rem 0;">
-                    <li class="fragment fade-up" data-fragment-index="1">один=перегруз</li>
-                    <li class="fragment fade-up" data-fragment-index="2">команда=специализация</li>
+                    <li>один=перегруз</li>
+                    <li>команда=специализация</li>
                 </ul>
                 
-                <div class="quote fragment fade-up" data-fragment-index="3">
+                <div class="quote">
                     Каждая задача — своему специалисту
                 </div>
             </section>
 
             <!-- Слайд 15: Таблица ролей -->
             <section>
-                <h2 class="fragment fade-up" data-fragment-index="0">Таблица ролей</h2>
+                <h2>Таблица ролей</h2>
                 
                 <div class="roles-grid">
-                    <div class="role-card fragment fade-up" data-fragment-index="1">
+                    <div class="role-card">
                         <div class="role-header">
                             <div class="role-name">Координатор</div>
                             <div class="role-model">Opus</div>
@@ -1036,7 +1047,7 @@
                         <p>Декомпозирует и раздаёт задачи</p>
                     </div>
                     
-                    <div class="role-card fragment fade-up" data-fragment-index="2">
+                    <div class="role-card">
                         <div class="role-header">
                             <div class="role-name">Ресёрчер</div>
                             <div class="role-model">Haiku</div>
@@ -1044,7 +1055,7 @@
                         <p>Ищет факты и информацию</p>
                     </div>
                     
-                    <div class="role-card fragment fade-up" data-fragment-index="3">
+                    <div class="role-card">
                         <div class="role-header">
                             <div class="role-name">Копирайтер</div>
                             <div class="role-model">Sonnet</div>
@@ -1052,7 +1063,7 @@
                         <p>Создаёт тексты и посты</p>
                     </div>
                     
-                    <div class="role-card fragment fade-up" data-fragment-index="4">
+                    <div class="role-card">
                         <div class="role-header">
                             <div class="role-name">Программист</div>
                             <div class="role-model">Opus</div>
@@ -1060,7 +1071,7 @@
                         <p>Пишет код, создаёт PDF, документы</p>
                     </div>
                     
-                    <div class="role-card fragment fade-up" data-fragment-index="5">
+                    <div class="role-card">
                         <div class="role-header">
                             <div class="role-name">QA</div>
                             <div class="role-model">Sonnet</div>
@@ -1072,29 +1083,29 @@
 
             <!-- Слайд 16: Контролирующий слой -->
             <section class="slide-loop">
-                <h2 class="fragment fade-up" data-fragment-index="0">Контролирующий слой</h2>
+                <h2>Контролирующий слой</h2>
                 
                 <div class="workflow-container">
                     <div class="workflow-main">
-                        <div class="workflow-step fragment fade-up" data-fragment-index="1">Задача</div>
-                        <div class="workflow-arrow fragment fade-up" data-fragment-index="2">→</div>
-                        <div class="workflow-step fragment fade-up" data-fragment-index="3">Координатор</div>
-                        <div class="workflow-arrow fragment fade-up" data-fragment-index="4">→</div>
-                        <div class="workflow-step fragment fade-up" data-fragment-index="5">Ресёрчер</div>
-                        <div class="workflow-arrow fragment fade-up" data-fragment-index="6">→</div>
-                        <div class="workflow-step fragment fade-up" data-fragment-index="7">Копирайтер</div>
-                        <div class="workflow-arrow fragment fade-up" data-fragment-index="8">→</div>
-                        <div class="workflow-step fragment fade-up" data-fragment-index="9">QA</div>
+                        <div class="workflow-step">Задача</div>
+                        <div class="workflow-arrow">→</div>
+                        <div class="workflow-step">Координатор</div>
+                        <div class="workflow-arrow">→</div>
+                        <div class="workflow-step">Ресёрчер</div>
+                        <div class="workflow-arrow">→</div>
+                        <div class="workflow-step">Копирайтер</div>
+                        <div class="workflow-arrow">→</div>
+                        <div class="workflow-step">QA</div>
                     </div>
                     
                     <div class="workflow-branches">
-                        <div class="workflow-branch fragment fade-up" data-fragment-index="10">
+                        <div class="workflow-branch">
                             <div class="workflow-ok">ОК</div>
                             <div class="workflow-arrow">→</div>
                             <div class="workflow-step">Результат</div>
                         </div>
                         
-                        <div class="workflow-branch fragment fade-up" data-fragment-index="11">
+                        <div class="workflow-branch">
                             <div class="workflow-error">Ошибка</div>
                             <div class="workflow-arrow">→</div>
                             <div>доработка</div>
@@ -1102,45 +1113,45 @@
                     </div>
                 </div>
                 
-                <div class="quote fragment fade-up" data-fragment-index="12">
+                <div class="quote">
                     Code review для любой задачи
                 </div>
             </section>
 
             <!-- Слайд 17: Свободный агент -->
             <section>
-                <h2 class="fragment fade-up" data-fragment-index="0">Свободный агент</h2>
+                <h2>Свободный агент</h2>
                 
                 <ul style="font-size: 1.3rem; line-height: 2; margin: 3rem 0;">
-                    <li class="fragment fade-up" data-fragment-index="1">один всегда свободен</li>
-                    <li class="fragment fade-up" data-fragment-index="2">горячая линия</li>
+                    <li>один всегда свободен</li>
+                    <li>горячая линия</li>
                 </ul>
             </section>
 
             <!-- Слайд 18: Демо 4 минуты -->
             <section>
-                <h2 class="fragment fade-up" data-fragment-index="0">Демо</h2>
+                <h2>Демо</h2>
                 
                 <div class="timeline">
-                    <div class="timeline-item fragment fade-up" data-fragment-index="1">
+                    <div class="timeline-item">
                         <div class="timeline-time">25 сек</div>
                         <div class="timeline-action">Ресёрч</div>
                     </div>
-                    <div class="timeline-item fragment fade-up" data-fragment-index="2">
+                    <div class="timeline-item">
                         <div class="timeline-time">1 мин</div>
                         <div class="timeline-action">Копирайт</div>
                     </div>
-                    <div class="timeline-item fragment fade-up" data-fragment-index="3">
+                    <div class="timeline-item">
                         <div class="timeline-time">30 сек</div>
                         <div class="timeline-action">QA: 3 замечания→возврат→ОК</div>
                     </div>
-                    <div class="timeline-item fragment fade-up" data-fragment-index="4">
+                    <div class="timeline-item">
                         <div class="timeline-time">2 мин</div>
                         <div class="timeline-action">PDF</div>
                     </div>
                 </div>
                 
-                <div class="glass-card fragment fade-up" data-fragment-index="5" style="text-align: center;">
+                <div class="glass-card" style="text-align: center;">
                     <strong style="color: var(--accent-green); font-size: 1.4rem;">
                         Итого 4мин 5агентов 0 ручного труда
                     </strong>
@@ -1149,40 +1160,42 @@
 
             <!-- Слайд 19: Тренды -->
             <section>
-                <h2 class="fragment fade-up" data-fragment-index="0">Тренды</h2>
+                <h2>Тренды</h2>
                 
                 <ul style="font-size: 1.3rem; line-height: 2; margin: 3rem 0;">
-                    <li class="fragment fade-up" data-fragment-index="1">ClawhHub.ai</li>
-                    <li class="fragment fade-up" data-fragment-index="2">мультимодальность</li>
-                    <li class="fragment fade-up" data-fragment-index="3">десятки агентов</li>
-                    <li class="fragment fade-up" data-fragment-index="4">MCP-протокол</li>
+                    <li>ClawhHub.ai</li>
+                    <li>мультимодальность</li>
+                    <li>десятки агентов</li>
+                    <li>MCP-протокол</li>
                 </ul>
             </section>
 
             <!-- Слайд 20: CTA -->
             <section>
                 <div class="cta-container">
-                    <div class="cta-title fragment fade-up" data-fragment-index="0">Начните сегодня</div>
+                    <div class="cta-title">Присоединяйтесь к AI First</div>
                     
                     <div class="cta-links">
-                        <a href="https://openclaw.ai" class="cta-card fragment fade-up" data-fragment-index="1">
-                            <div class="cta-card-title">openclaw.ai</div>
-                            <div class="cta-card-desc">установка</div>
+                        <a href="https://openclaw.ai" class="cta-card">
+                            <div class="cta-card-title">🚀 openclaw.ai</div>
+                            <div class="cta-card-desc">Установка и начало работы</div>
                         </a>
                         
-                        <a href="https://docs.openclaw.ai" class="cta-card fragment fade-up" data-fragment-index="2">
-                            <div class="cta-card-title">docs.openclaw.ai</div>
-                            <div class="cta-card-desc">документация</div>
+                        <a href="https://docs.openclaw.ai" class="cta-card">
+                            <div class="cta-card-title">📚 docs.openclaw.ai</div>
+                            <div class="cta-card-desc">Документация и гайды</div>
                         </a>
                         
-                        <a href="https://clawhub.ai" class="cta-card fragment fade-up" data-fragment-index="3">
-                            <div class="cta-card-title">clawhub.ai</div>
-                            <div class="cta-card-desc">маркетплейс skills</div>
+                        <a href="https://clawhub.ai" class="cta-card">
+                            <div class="cta-card-title">🧩 clawhub.ai</div>
+                            <div class="cta-card-desc">Маркетплейс Skills</div>
                         </a>
                     </div>
                     
-                    <div class="fragment fade-up" data-fragment-index="4" style="margin-top: 3rem;">
-                        <strong style="color: var(--text-primary);">Алексей Южанинов / AI First</strong>
+                    <div class="glass-card" style="text-align: center; margin-top: 2rem;">
+                        <p style="font-size: 1.3rem; color: var(--accent-green); font-weight: 600; margin-bottom: 0.5rem;">Сообщество AI First</p>
+                        <p style="font-size: 1.1rem;">Записывайтесь на следующие встречи · Обсуждаем кейсы · Помогаем с настройкой</p>
+                        <p style="font-size: 1.2rem; margin-top: 1rem;"><strong style="color: var(--text-primary);">Алексей Южанинов</strong></p>
                     </div>
                 </div>
             </section>
@@ -1215,8 +1228,8 @@
             // Don't loop
             loop: false,
             
-            // Enable fragments
-            fragments: true,
+            // Fragments disabled — all content appears with slide
+            fragments: false,
             
             // Auto slide disabled
             autoSlide: 0,
