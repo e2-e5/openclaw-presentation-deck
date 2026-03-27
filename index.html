@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>OpenClaw: ваш первый цифровой сотрудник</title>
+    
+    <!-- Reveal.js CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #08090d;
+            --text-color: #F6F7FB;
+            --accent-blue: #0066FF;
+            --accent-green: #00FFB7;
+            --card-bg: rgba(255,255,255,0.05);
+            --card-border: rgba(255,255,255,0.1);
+        }
+        
+        .reveal {
+            font-family: 'Manrope', sans-serif;
+            color: var(--text-color);
+            background: var(--bg-color);
+        }
+        
+        .reveal .slides {
+            text-align: left;
+        }
+        
+        .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1em;
+        }
+        
+        .reveal h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 0.5em;
+        }
+        
+        .reveal h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1em;
+        }
+        
+        .reveal h3 {
+            font-size: 2rem;
+            color: var(--accent-blue);
+            margin-bottom: 0.8em;
+        }
+        
+        .reveal .subtitle {
+            font-size: 1.4rem;
+            color: rgba(246, 247, 251, 0.7);
+            margin-top: 2rem;
+            font-weight: 400;
+        }
+        
+        .reveal ul, .reveal ol {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin: 1em 0;
+        }
+        
+        .reveal ul li, .reveal ol li {
+            margin: 0.5em 0;
+        }
+        
+        .reveal blockquote {
+            background: var(--card-bg);
+            border-left: 4px solid var(--accent-green);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-style: italic;
+            backdrop-filter: blur(12px);
+        }
+        
+        .reveal table {
+            margin: 2rem auto;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+            width: 100%;
+        }
+        
+        .reveal table th {
+            background: rgba(0, 102, 255, 0.2);
+            color: var(--text-color);
+            padding: 1rem;
+            font-weight: 600;
+            font-family: 'Space Grotesk', sans-serif;
+            border-bottom: 1px solid var(--card-border);
+        }
+        
+        .reveal table td {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.02);
+        }
+        
+        .reveal table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .reveal table tr:nth-child(even) td {
+            background: rgba(255,255,255,0.03);
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            backdrop-filter: blur(12px);
+            transition: transform 0.2s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .bento-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1rem;
+            backdrop-filter: blur(12px);
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        
+        .architecture-diagram {
+            text-align: center;
+            font-family: 'Space Grotesk', monospace;
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+        }
+        
+        .architecture-diagram .box {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 0.5rem auto;
+            width: fit-content;
+            font-weight: 600;
+        }
+        
+        .architecture-diagram .arrow {
+            font-size: 2rem;
+            color: var(--accent-green);
+            margin: 0.5rem 0;
+        }
+        
+        .workflow-diagram {
+            text-align: center;
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+        }
+        
+        .workflow-step {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            margin: 0.2rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .arrow-right {
+            color: var(--accent-green);
+            font-size: 1.5rem;
+            margin: 0 0.5rem;
+        }
+        
+        .reveal .controls {
+            color: var(--accent-blue);
+        }
+        
+        .reveal .progress {
+            color: var(--accent-green);
+        }
+        
+        .reveal .slide-number {
+            color: rgba(246, 247, 251, 0.6);
+            background-color: rgba(8, 9, 13, 0.8);
+            backdrop-filter: blur(8px);
+            border-radius: 8px;
+            padding: 0.5rem;
+        }
+        
+        .title-slide {
+            text-align: center;
+            display: flex !important;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        
+        .title-slide h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-section {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            text-align: center;
+        }
+        
+        .cta-links {
+            display: flex;
+            justify-content: space-around;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .cta-link {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--accent-blue);
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-link:hover {
+            background: var(--accent-blue);
+            color: white;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .reveal h1 {
+                font-size: 2.5rem;
+            }
+            
+            .reveal h2 {
+                font-size: 2rem;
+            }
+            
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .reveal .slides {
+                font-size: 0.9rem;
+            }
+        }
+        
+        .small-text {
+            font-size: 0.9rem;
+        }
+        
+        .reveal .slides section {
+            padding: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <!-- Слайд 1: Титул -->
+            <section class="title-slide">
+                <h1>OpenClaw: ваш первый цифровой сотрудник</h1>
+                <div class="subtitle">
+                    AI First · Алексей Южанинов · Март 2026
+                </div>
+            </section>
+
+            <!-- Слайд 2: Контекст -->
+            <section>
+                <h2>Контекст — что происходит прямо сейчас</h2>
+                <ul>
+                    <li><strong>Jensen Huang (NVIDIA):</strong> «Каждой компании нужна OpenClaw-стратегия. Это новый компьютер.»</li>
+                    <li><strong>68 000+</strong> звёзд на GitHub за 3 месяца</li>
+                    <li><strong>Forbes, DigitalOcean, KDnuggets</strong> — все пишут</li>
+                    <li><strong>OpenClaw</strong> — самый горячий AI-инструмент 2026</li>
+                </ul>
+            </section>
+
+            <!-- Слайд 3: Три поколения AI -->
+            <section>
+                <h2>Три поколения AI</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>ChatGPT (2023)</th>
+                            <th>Claude Code (2025)</th>
+                            <th>OpenClaw (2026)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Где живёт</strong></td>
+                            <td>Облако</td>
+                            <td>Локально</td>
+                            <td>Везде: Telegram, Slack, WhatsApp</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Что делает</strong></td>
+                            <td>Советует</td>
+                            <td>Кодит</td>
+                            <td>Действует</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Память</strong></td>
+                            <td>Слабая</td>
+                            <td>Контекст файлов</td>
+                            <td>Персистентная, улучшается</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Автономность</strong></td>
+                            <td>Нет</td>
+                            <td>По запросу</td>
+                            <td>Heartbeat каждые 30 мин</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Инструменты</strong></td>
+                            <td>Плагины</td>
+                            <td>Файлы, терминал</td>
+                            <td>Браузер, API, email, cron, skills</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="text-align: center; margin-top: 2rem; font-weight: 600; color: var(--accent-green);">
+                    Ключевая разница: ChatGPT — чат. Claude Code — кодер. OpenClaw — сотрудник.
+                </div>
+            </section>
+
+            <!-- Слайд 4: Простая метафора -->
+            <section>
+                <h2>Простая метафора</h2>
+                <ul style="font-size: 1.3rem; line-height: 1.8;">
+                    <li><strong>ChatGPT</strong> — переписываться с умным консультантом</li>
+                    <li><strong>Claude Code</strong> — посадить программиста за свой ноутбук</li>
+                    <li><strong>OpenClaw</strong> — нанять сотрудника, дать ему телефон, доступы и сказать «работай»</li>
+                </ul>
+                
+                <div class="card" style="margin-top: 3rem;">
+                    <p style="font-size: 1.2rem; font-weight: 600;">
+                        Он не просто отвечает — он <span style="color: var(--accent-green);">ДЕЛАЕТ</span>. 
+                        Отвечает на письма, заходит на сайты, мониторит конкурентов, пишет посты и присылает утренний отчёт.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Слайд 5: Почему это важно -->
+            <section>
+                <h2>Почему это важно для предпринимателей</h2>
+                <ul style="font-size: 1.3rem; line-height: 2;">
+                    <li>Разрыв между «хочу попробовать ИИ» и «ИИ реально работает на меня» — <strong style="color: var(--accent-green);">ОГРОМНЫЙ</strong></li>
+                    <li><strong>ChatGPT</strong> = советчик. <strong>OpenClaw</strong> = исполнитель.</li>
+                    <li>Ты ставишь задачу в Telegram → агент выполняет</li>
+                </ul>
+            </section>
+
+            <!-- Слайд 6: Архитектура -->
+            <section>
+                <h2>Как устроено — архитектура (просто)</h2>
+                <div class="architecture-diagram">
+                    <div class="box">Telegram / Slack / WhatsApp</div>
+                    <div class="arrow">↕</div>
+                    <div class="box">OpenClaw Gateway</div>
+                    <div class="arrow">↕</div>
+                    <div class="box">AI мозг: Claude / GPT / Gemini</div>
+                    <div class="arrow">↕</div>
+                    <div class="box">Инструменты: браузер, email, файлы, API, cron</div>
+                </div>
+            </section>
+
+            <!-- Слайд 7: 10 шагов настройки -->
+            <section>
+                <h2>10 шагов настройки (из видео Greg Isenberg)</h2>
+                <div class="two-column">
+                    <div>
+                        <ol>
+                            <li>Установка на сервер</li>
+                            <li>Персонализация</li>
+                            <li>Память — persist + improve</li>
+                            <li>Выбор модели</li>
+                            <li>Подключение Telegram</li>
+                        </ol>
+                    </div>
+                    <div>
+                        <ol start="6">
+                            <li>Настройка браузера</li>
+                            <li>Skills — маркетплейс</li>
+                            <li>Heartbeat — каждые 30 мин</li>
+                            <li>Безопасность</li>
+                            <li>Минимальные права</li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Слайд 8: Безопасность -->
+            <section>
+                <h2>Безопасность</h2>
+                <ul style="font-size: 1.2rem; line-height: 1.8;">
+                    <li>Агент видит <strong style="color: var(--accent-green);">ТОЛЬКО</strong> то, что ты разрешил</li>
+                    <li>Отдельные аккаунты для агентов</li>
+                    <li>Prompt injection — реальная угроза, есть защита</li>
+                    <li><strong>Принцип:</strong> минимальные права, максимальный контроль</li>
+                </ul>
+            </section>
+
+            <!-- Слайд 9: Юзкейсы -->
+            <section>
+                <h2>Юзкейсы — что реально делают люди</h2>
+                <div class="bento-grid">
+                    <div class="bento-card">📧 <strong>Email-автопилот</strong><br>4 000 писем за 2 дня</div>
+                    <div class="bento-card">🌅 <strong>Утренний briefing</strong><br>погода + задачи + почта</div>
+                    <div class="bento-card">✍️ <strong>Контент без slop</strong><br>10+ часов экономии/нед</div>
+                    <div class="bento-card">🏗️ <strong>Лендинг за ночь</strong></div>
+                    <div class="bento-card">📊 <strong>Конкурентный мониторинг</strong><br>каждый день</div>
+                    <div class="bento-card">🎯 <strong>CRM из разговоров</strong></div>
+                    <div class="bento-card">📚 <strong>Научный мониторинг</strong></div>
+                    <div class="bento-card">💼 <strong>Бизнес на автопилоте</strong></div>
+                </div>
+            </section>
+
+            <!-- Слайд 10: Кейс 1 -->
+            <section>
+                <h2>Кейс 1 — «No AI Slop» контент</h2>
+                <ul style="font-size: 1.2rem; line-height: 1.8;">
+                    <li><strong style="color: var(--accent-blue);">Проблема:</strong> ИИ-тексты выглядят как ИИ</li>
+                    <li><strong style="color: var(--accent-green);">Решение:</strong> система промптов + стиль автора + проверка quality</li>
+                    <li><strong style="color: var(--accent-green);">Результат:</strong> посты неотличимые от человеческих</li>
+                </ul>
+            </section>
+
+            <!-- Слайд 11: Кейс 2 -->
+            <section>
+                <h2>Кейс 2 — CRM из разговоров</h2>
+                <ul style="font-size: 1.2rem; line-height: 1.8;">
+                    <li>Записал встречу → агент транскрибирует → логирует в CRM</li>
+                    <li>Пишешь в Telegram: «Иванов заинтересован, перезвонить в четверг»</li>
+                    <li>Агент сам заносит в базу</li>
+                </ul>
+            </section>
+
+            <!-- Слайд 12: Кейс 3 -->
+            <section>
+                <h2>Кейс 3 — Overnight mini-app</h2>
+                <ul style="font-size: 1.2rem; line-height: 1.8;">
+                    <li>Описываешь идею вечером одной фразой</li>
+                    <li>Агент: исследует, пишет код, деплоит</li>
+                    <li>Утром: рабочий лендинг с доменом</li>
+                </ul>
+            </section>
+
+            <!-- Слайд 13: Ещё юзкейсы -->
+            <section>
+                <h2>Ещё юзкейсы</h2>
+                <ul style="font-size: 1.1rem; line-height: 1.6;">
+                    <li>🏠 Умный дом через Telegram</li>
+                    <li>✈️ Путешествия — маршрут + бюджет</li>
+                    <li>💰 Финансы — чеки → учёт расходов</li>
+                    <li>📱 Автопостинг в X, LinkedIn, Telegram</li>
+                    <li>🔍 Мониторинг 100+ источников → дайджест</li>
+                    <li>🤝 Торг при покупке авто через агента</li>
+                </ul>
+            </section>
+
+            <!-- Слайд 14: Команда агентов -->
+            <section>
+                <h2>Команда агентов — масштаб</h2>
+                <ul style="font-size: 1.2rem; line-height: 1.8;">
+                    <li>Один агент = один сотрудник с перегрузом</li>
+                    <li>Команда = каждый делает своё</li>
+                </ul>
+                <blockquote style="margin-top: 2rem;">
+                    «Когда агент делает всё сам — он много нарушает. Каждая задача — своему специалисту»
+                </blockquote>
+            </section>
+
+            <!-- Слайд 15: Как выглядит команда -->
+            <section>
+                <h2>Как выглядит команда</h2>
+                <table style="font-size: 1rem;">
+                    <thead>
+                        <tr>
+                            <th>Роль</th>
+                            <th>Модель</th>
+                            <th>Что делает</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>🎯 Координатор</td>
+                            <td>Opus</td>
+                            <td>Декомпозирует, раздаёт</td>
+                        </tr>
+                        <tr>
+                            <td>🔍 Ресёрчер</td>
+                            <td>Haiku</td>
+                            <td>Поиск фактов</td>
+                        </tr>
+                        <tr>
+                            <td>✍️ Копирайтер</td>
+                            <td>Sonnet</td>
+                            <td>Тексты, посты</td>
+                        </tr>
+                        <tr>
+                            <td>💻 Программист</td>
+                            <td>Opus</td>
+                            <td>Код, PDF, docs</td>
+                        </tr>
+                        <tr>
+                            <td>⚖️ QA/Юрист</td>
+                            <td>Sonnet</td>
+                            <td>Проверка, возврат на доработку</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="text-align: center; margin-top: 2rem; color: var(--accent-green);">
+                    Каждый — отдельный Telegram-бот, своя память, свои скиллы
+                </div>
+            </section>
+
+            <!-- Слайд 16: Контролирующий слой -->
+            <section>
+                <h2>Контролирующий слой</h2>
+                <div class="workflow-diagram">
+                    <div>
+                        <span class="workflow-step">Задача</span>
+                        <span class="arrow-right">→</span>
+                        <span class="workflow-step">Координатор</span>
+                        <span class="arrow-right">→</span>
+                        <span class="workflow-step">Ресёрчер</span>
+                        <span class="arrow-right">→</span>
+                        <span class="workflow-step">Копирайтер</span>
+                        <span class="arrow-right">→</span>
+                        <span class="workflow-step">QA</span>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <span style="color: var(--accent-green);">QA: ОК</span> → <span class="workflow-step">Результат</span>
+                    </div>
+                    <div style="margin-top: 0.5rem;">
+                        <span style="color: var(--accent-blue);">QA: Ошибка</span> → назад на доработку → повторная проверка
+                    </div>
+                </div>
+                <blockquote style="margin-top: 2rem; text-align: center;">
+                    «Это как code review, но для любой задачи»
+                </blockquote>
+            </section>
+
+            <!-- Слайд 17: Свободный агент -->
+            <section>
+                <h2>Свободный агент</h2>
+                <ul style="font-size: 1.2rem; line-height: 1.8;">
+                    <li>Пока команда работает — один агент всегда свободен</li>
+                    <li>Срочный вопрос, проверка статуса, новая задача</li>
+                    <li>Координатор занят → но у тебя есть «горячая линия»</li>
+                </ul>
+            </section>
+
+            <!-- Слайд 18: Демо -->
+            <section>
+                <h2>Демо — конвейер за 4 минуты</h2>
+                <ul style="font-size: 1.2rem; line-height: 1.8;">
+                    <li>Ресёрчер: 25 сек → 5 новостей</li>
+                    <li>Копирайтер: пост в стиле автора</li>
+                    <li>QA: 3 замечания → возврат → доработка → ОК</li>
+                    <li>Программист: оформил PDF</li>
+                </ul>
+                <div class="card" style="text-align: center; margin-top: 2rem;">
+                    <strong style="color: var(--accent-green); font-size: 1.3rem;">
+                        Итого: 4 минуты, 5 агентов, 0 ручного труда
+                    </strong>
+                </div>
+            </section>
+
+            <!-- Слайд 19: Что дальше -->
+            <section>
+                <h2>Что дальше — тренды</h2>
+                <ul style="font-size: 1.2rem; line-height: 1.8;">
+                    <li>Skills маркетплейс (ClawhHub.ai)</li>
+                    <li>Мультимодальность: камера, голос, экран</li>
+                    <li>Команды из десятков агентов</li>
+                    <li>MCP-протокол — стандарт подключения</li>
+                </ul>
+                <blockquote style="margin-top: 2rem; text-align: center;">
+                    «Каждому бизнесу нужна OpenClaw-стратегия»
+                </blockquote>
+            </section>
+
+            <!-- Слайд 20: CTA -->
+            <section>
+                <h2>Как начать</h2>
+                <div class="cta-section">
+                    <div class="cta-links">
+                        <a href="https://openclaw.ai" class="cta-link">openclaw.ai — установка</a>
+                        <a href="https://docs.openclaw.ai" class="cta-link">docs.openclaw.ai — документация</a>
+                        <a href="https://clawhub.ai" class="cta-link">clawhub.ai — скиллы</a>
+                    </div>
+                    <div style="margin-top: 2rem;">
+                        <strong>Контакт:</strong> Алексей Южанинов / AI First
+                    </div>
+                    <div style="margin-top: 1rem; color: var(--accent-green);">
+                        <strong>Следующая встреча AI First</strong>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Reveal.js JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+    <script>
+        // Initialize Reveal.js
+        Reveal.initialize({
+            hash: true,
+            controls: true,
+            progress: true,
+            center: false,
+            transition: 'fade',
+            transitionSpeed: 'default',
+            backgroundTransition: 'fade',
+            
+            // Display presentation progress, can be 'display', 'hidden' or 'auto'
+            slideNumber: 'c/t',
+            
+            // Enable keyboard shortcuts for navigation
+            keyboard: true,
+            
+            // Enable touch navigation on devices with touch input
+            touch: true,
+            
+            // Loop the presentation
+            loop: false,
+            
+            // Change the presentation direction to be right-to-left
+            rtl: false,
+            
+            // Randomizes the order of slides each time the presentation loads
+            shuffle: false,
+            
+            // Turns fragments on and off globally
+            fragments: true,
+            
+            // Flags if the presentation is running in an embedded mode,
+            // i.e. contained within a limited portion of the screen
+            embedded: false,
+            
+            // Flags if we should show a help overlay when the questionmark
+            // key is pressed
+            help: true,
+            
+            // Number of milliseconds between automatically proceeding to the
+            // next slide, disabled when set to 0, this value can be overwritten
+            // by using a data-autoslide attribute on your slides
+            autoSlide: 0,
+            
+            // Stop auto-sliding after user input
+            autoSlideStoppable: true,
+            
+            // Enable slide navigation via mouse wheel
+            mouseWheel: true,
+            
+            // Hide the address bar on mobile devices
+            hideAddressBar: true,
+            
+            // Opens links in an iframe preview overlay
+            previewLinks: false,
+            
+            // Exposes the reveal.js API through window.Reveal
+            focusBodyOnPageVisibilityChange: true,
+            
+            // Visibility rule for backwards navigation arrows; "faded", "hidden"
+            // or "visible"
+            controlsBackArrows: 'faded',
+            
+            // Display a presentation progress bar
+            progressBar: true,
+            
+            // Display the page number of the current slide
+            showSlideNumber: 'all',
+            
+            // Add the current slide number to the URL hash so that reloading the
+            // page/copying the URL will return you to the same slide
+            hashOneBasedIndex: false,
+            
+            // Determine which displays to show the slide number on
+            showSlideNumber: 'all',
+            
+            // Push each slide change to the browser history
+            history: false,
+            
+            // Enable support for jump-to-slide navigation shortcuts
+            jumpToSlide: true,
+            
+            // Automatically activate the preview mode for the focused slide
+            preloadIframes: null,
+            
+            // Can be used to limit the contexts in which the presentation
+            // will respond to user interactions
+            respondToHashChanges: true,
+            
+            // Enable the slide overview mode
+            overview: true,
+            
+            // Vertical centering of slides
+            center: false,
+            
+            // Enables touch navigation on devices with touch input
+            touch: true,
+            
+            // Loop the presentation
+            loop: false,
+            
+            // Presentation direction
+            rtl: false,
+            
+            // Maximum number of pages a single slide can expand onto when printing
+            // to PDF, unlimited by default
+            pdfMaxPagesPerSlide: Number.POSITIVE_INFINITY,
+            
+            // Offset used to reduce the height of content within exported PDF pages.
+            // This exists to account for environment differences that may cause
+            // content to trickle down onto a new page
+            pdfPageHeightOffset: -1,
+            
+            // Number of slides away from the current that are visible
+            viewDistance: 3
+        });
+        
+        // Add keyboard shortcuts
+        Reveal.addKeyBinding( { keyCode: 13, key: 'Enter', description: 'Go to next slide' }, 'next' );
+        Reveal.addKeyBinding( { keyCode: 8, key: 'Backspace', description: 'Go to previous slide' }, 'prev' );
+    </script>
+</body>
+</html>
